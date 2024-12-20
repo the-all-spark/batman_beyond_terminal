@@ -6,8 +6,96 @@
     <title>Batman Beyond Terminal</title>
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/style.css">
+    <script src="script.js"></script>
 </head>
 <body>
+
+    <div class="terminal">
+
+        <!-- Блок часов -->
+        <div class="left-screen"> 
+            <div class="clock"></div>
+            <p class="city">Gotham</p>
+        </div>
+
+        <!-- Блок основной информации -->
+        <div class="center-screen"> 
+
+            <div class="characteristics-block">
+                <!-- Костюм -->
+                <div class="costume-block">
+                    <div class="batman-photo-block">
+                        <img class="batman-photo main-photo" src="./assets/batman_beyond.jpg" alt="Batman Beyond">
+
+                        <!-- Рамки выделения элементов костюма -->
+                        <div class="bb-mask-square selected-square" data-part="mask"></div>
+
+
+                    </div>
+                    
+                    <div class="info">
+                        <!-- Увеличенные элементы частей костюма -->
+                        <img class="bb-mask part-photo" src="./assets/bb_mask.jpg" data-part="mask" alt="Mask">
+
+                        <!-- TODO Выноски информации -->
+                        
+                    </div>
+                    
+                    <img class="terry-photo main-photo" src="./assets/terry_mcginnis.jpg" alt="Terry McGinnis">
+                </div>
+
+                <!-- Показатели -->
+                <div class="parameters">
+                    <div>
+                        <p>Strength</p>
+                        <div class="param">
+                            <!-- <input orient='0' type='range' min='0' value='8' max='10' disabled /> -->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Клавиатуры -->
+            <div class="keyboard">
+                <button data-part="mask">Mask</button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button>Translate</button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button>References</button>
+            </div>
+        
+        </div>
+
+        <!-- Блок транспорта -->
+        <div class="right-screen"> 
+
+            <div class="bb-symbol">
+                <img src="./assets/bb_symbol.png" alt="Batman Beyond Symbol">
+            </div>
+
+            <div>
+                <p>Batmobile</p>
+                <img src="" alt="Бэтмобиль">
+            </div>
+        
+        </div>
+
+    </div>
     
 </body>
 </html>
