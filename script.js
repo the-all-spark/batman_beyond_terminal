@@ -3,39 +3,83 @@ window.addEventListener("load", showAll);
 function showAll() {
 
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard button"));
-    console.log(keyboardButtons);
+    //console.log(keyboardButtons);
 
-    // * Выделение части костюма рамкой и отображение увеличенного фрагмента при клике на кнопку
+    // *Выбор действия при клике на кнопку "клавиатуры"
     keyboardButtons.forEach( (button) => button.addEventListener("click", function() { 
-        showCostumePart(this.dataset.part); 
+        chooseAction(this.dataset);
     }));
 
-    function showCostumePart(part) {
-        //console.log(part);
+    // функция выбора действия в зависимости от атрибута data
+    function chooseAction(dataAttr) {
+        //console.log(dataAttr);
 
-        if (part !== undefined) {
-            showFrame(part); // показать рамку
-            showZoomedImage(part); // показать увеличенное изображение
+        if ("part" in dataAttr) {
+            showCostumePart(dataAttr);
+        } else {
+            console.log("Выбрано что-то другое");
+            // TODO вставить другую функцию
         }
+    }
+
+    // * Выделение части костюма рамкой и отображение увеличенного фрагмента при клике на кнопку
+    function showCostumePart(dataAttr) {
+        let costumePart = dataAttr.part;
+
+        hidePrevious(costumePart); // скрыть предыдущие // ? для других кроме частей костюма?
+
+        if (costumePart !== undefined) {
+            showFrame(costumePart); // показать рамку
+            showZoomedImage(costumePart); // показать увеличенное изображение
+        }
+    }
+
+    // функция скрытия предыдущих показанных рамок и изображений (кроме текущего)
+    function hidePrevious(part) {
+
+        // рамки
+        let previousSelectedFrames = document.querySelectorAll(".selected-part-frame");
+        previousSelectedFrames.forEach ( (frame) =>  {
+            if (frame.dataset.part !== part) {
+                frame.classList.remove("selected-part-frame");
+            }
+        });
+
+        // изображения
+        let previousShownImages = document.querySelectorAll(".shown-part-photo");
+        previousShownImages.forEach ( (image) => {
+            if (image.dataset.part !== part) {
+                image.classList.remove("shown-part-photo");
+            }
+        });
     }
     
     // функция отображения рамки при клике на часть костюма
     function showFrame(part) {
         let selectedCostumePart = document.querySelector(`.batman-photo-block div[data-part="${part}"]`);
-        selectedCostumePart.classList.toggle("shown");
+        selectedCostumePart.classList.toggle("selected-part-frame");
+
+       /* if (selectedCostumePart.classList.contains("selected-part-frame")) {
+            selectedCostumePart.classList.remove("selected-part-frame"); 
+        } else {
+            selectedCostumePart.classList.add("selected-part-frame");
+        }*/
     }
 
     // функция отображения увеличенного изображения части костюма
     function showZoomedImage(part) {
         let selectedCostumePart = document.querySelector(`.info img[data-part="${part}"]`);
-        selectedCostumePart.classList.toggle("shown");
+        selectedCostumePart.classList.toggle("shown-part-photo");
     }
 
 
-    
 
 
-    // Запрет перетаскивания изображений
+
+
+
+
+    // * Запрет перетаскивания изображений
     let allImg = document.querySelectorAll("img");
 
     allImg.forEach( (elem) => {
