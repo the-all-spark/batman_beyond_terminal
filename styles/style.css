@@ -3,7 +3,7 @@
     src: url(../fonts/consolas.ttf);
 }
 
-/* ----- Общие ------ */
+/* ------------------------- Общие ----------------------- */
 
 html, 
 body {
@@ -41,13 +41,12 @@ img {
     user-select: none;   
 }
 
-/* ----- Терминал (экраны) ------ */
+/* ----------------- Терминал (экраны) ------------------ */
 
 .terminal {
     width: 97vw;
     height: 94vh;
     background-color: rgb(46, 41, 36);
-    /*margin: 0 auto;*/
     display: grid;
     grid-template-areas: "left-screen center-screen right-screen";
     grid-template-columns: 12% auto 15%;
@@ -82,9 +81,11 @@ img {
     grid-area: right-screen;
     height: 100%;
     background-color: rgb(26, 27, 30);
+    padding: 15px;
+    box-sizing: border-box;
 }
 
-/* Центральный (основной) блок */
+/* ----------- Центральный (основной) блок ---------- */
 
 .characteristics-block {
     grid-area: characteristics-block;
@@ -93,19 +94,6 @@ img {
     grid-template-columns: auto 15%;
     grid-template-rows: 100%;
     column-gap: 20px;
-}
-
-.keyboard {
-    grid-area: keyboard;
-    background-color: rgb(26, 27, 30);
-    /*background-color: aqua;*/
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /*column-gap: 10px;
-    row-gap: 10px;*/
-    flex-wrap: wrap;
-    padding: 13px;
 }
 
 .costume-block {
@@ -123,7 +111,19 @@ img {
 .parameters {
     grid-area: parameters;
     background-color: rgb(26, 27, 30);
+    padding: 15px;
 }
+
+.parameters p {
+    margin-top: 0;
+}
+
+.costume-block img {
+    box-sizing: border-box;
+    border: 1px solid rgb(26, 27, 30);
+}
+
+/* Блок костюма */
 
 .batman-photo-block {
     grid-area: batman;
@@ -142,26 +142,39 @@ img {
     padding-top: 10px;
 }
 
-.costume-block img {
-    box-sizing: border-box;
-    border: 1px solid rgb(26, 27, 30);
-}
-
 .main-photo {
     height: 67vh;
 }
 
-.part-photo {
+.part-photo-vertical {
     height: 30vh;
     display: none;
 }
 
-.selected-square {
-    border: 2px solid #ff0000;
+.part-photo-horizontal {
+    width: 30vh;
+    display: none;
+}
+
+.shown-part-photo {
+    display: block;
+}
+
+/* Рамки выделения частей костюма */
+
+.part-frame {
+    border: 1px solid transparent;
     position: absolute;
     z-index: 99;
-    visibility: hidden;
-    /*display: none;*/
+}
+
+.selected-part-frame {
+    border: 1px solid #ff0000;
+}
+
+.part-frame:hover {
+    border: 1px solid #494949;
+    background-color: rgba(0, 0, 0, 0.13);
 }
 
 .bb-mask-square {
@@ -171,22 +184,37 @@ img {
     left: 63px;
 }
 
-.shown {
-    display: block;
-    visibility: visible;
+.bb-belt-square {
+    width: 90px;
+    height: 33px;
+    top: 189px;
+    left: 64px;
 }
 
 /* Характеристики */
 
-input[type="range" i]:disabled {
-    color: aqua;
+    /*input[type="range" i]:disabled {
+        color: aqua;
+    }*/
+
+/* Клавиатура */
+
+.keyboard {
+    grid-area: keyboard;
+    background-color: rgb(26, 27, 30);
+    /*background-color: aqua;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 13px;
 }
 
 /* Правый блок - транспорт, символ */
 .bb-symbol img {
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 5px;
 }
 
 

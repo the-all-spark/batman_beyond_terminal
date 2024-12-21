@@ -27,15 +27,21 @@
                     <div class="batman-photo-block">
                         <img class="batman-photo main-photo" src="./assets/batman_beyond.jpg" alt="Batman Beyond">
 
-                        <!-- Рамки выделения элементов костюма -->
-                        <div class="bb-mask-square selected-square" data-part="mask"></div>
+                        <!-- ! Рамки выделения элементов костюма -->
+                        <div class="bb-mask-square part-frame" data-part="mask"></div>
+                        <div class="bb-belt-square part-frame" data-part="belt"></div>
+
+
 
 
                     </div>
                     
                     <div class="info">
-                        <!-- Увеличенные элементы частей костюма -->
-                        <img class="bb-mask part-photo" src="./assets/bb_mask.jpg" data-part="mask" alt="Mask">
+                        <!-- ! Увеличенные элементы частей костюма -->
+                        <img class="bb-mask part-photo-vertical" src="./assets/bb_mask.jpg" data-part="mask" alt="Mask">
+                        <img class="bb-belt part-photo-horizontal" src="./assets/bb_belt.jpg" data-part="belt" alt="Belt">
+
+
 
                         <!-- TODO Выноски информации -->
                         
@@ -62,12 +68,12 @@
                 <button data-part="mask">Mask</button>
                 <button></button>
                 <button></button>
+                <button data-part="belt">Belt</button>
                 <button></button>
                 <button></button>
                 <button></button>
                 <button></button>
-                <button></button>
-                <button>Translate</button>
+                <button data-action="translate">Translate</button>
                 <button></button>
                 <button></button>
                 <button></button>
