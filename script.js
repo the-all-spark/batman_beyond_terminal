@@ -5,10 +5,39 @@ function showAll() {
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard button"));
     //console.log(keyboardButtons);
 
-    // * Выбор действия при клике на кнопку "клавиатуры"
+    // * Выбор действия при клике на кнопку "клавиатуры", эффект нажатой кнопки
     keyboardButtons.forEach( (button) => button.addEventListener("click", function() { 
+        markBtnAsPushed(this.dataset);
         chooseAction(this.dataset);
     }));
+
+    // * функция выделения кнопки как нажатой
+    function markBtnAsPushed(dataAttr) {
+        let attr = Object.keys(dataAttr)[0];
+        let value = Object.values(dataAttr)[0];
+        //console.log(attr);
+        //console.log(value);
+
+        let pushedButton = document.querySelector(`.keyboard button[data-${attr}="${value}"]`);
+
+        if (pushedButton !== null) {
+            if (pushedButton.classList.contains("pushed-btn")) {
+                pushedButton.classList.remove("pushed-btn"); // отжатая кнопка
+            } else {
+                unmarkBtns();
+                pushedButton.classList.add("pushed-btn");
+            } 
+        }
+    }
+
+    // функция удаления выделения всех ранее "нажатых" кнопок
+    function unmarkBtns() {
+        let previousMarkedBtns = document.querySelectorAll(".pushed-btn");
+
+        previousMarkedBtns.forEach( (button) =>  {
+            button.classList.remove("pushed-btn");
+        });
+    }
 
     // функция выбора действия в зависимости от атрибута data
     function chooseAction(dataAttr) {
@@ -38,7 +67,7 @@ function showAll() {
 
         // рамки
         let previousSelectedFrames = document.querySelectorAll(".selected-part-frame");
-        previousSelectedFrames.forEach ( (frame) =>  {
+        previousSelectedFrames.forEach( (frame) =>  {
             if (frame.dataset.part !== part) {
                 frame.classList.remove("selected-part-frame");
             }
@@ -46,7 +75,7 @@ function showAll() {
 
         // изображения
         let previousShownImages = document.querySelectorAll(".shown-part-photo");
-        previousShownImages.forEach ( (image) => {
+        previousShownImages.forEach( (image) => {
             if (image.dataset.part !== part) {
                 image.classList.remove("shown-part-photo");
             }
