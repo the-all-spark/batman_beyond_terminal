@@ -24,17 +24,36 @@ p {
 }
 
 button {
-    background-color: aqua;
-    background: radial-gradient(rgb(170, 249, 249), rgb(138, 249, 249), aqua);
+    /*background-color: aqua;*/
+    background: radial-gradient(rgb(170, 249, 249), rgb(138, 249, 249), rgb(20, 255, 255));
     width: 100px;
     height: 30px;
     text-transform: uppercase;
     font-size: 14px;
     font-family: Consolas;
+    /*border-top: 3px solid #ff0000;*/
 }
 
-button:hover {
+button:disabled {
+    color: rgb(95, 95, 95);
+}
+
+button:disabled:hover {
+    cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
     cursor: pointer;
+    background: radial-gradient(rgb(148, 255, 255), rgb(153, 255, 255), rgb(61, 249, 249), rgb(0, 164, 164));
+}
+
+button:not(:disabled):active {
+    cursor: pointer;
+    background: radial-gradient(rgb(69, 238, 238), rgb(20, 197, 209), rgb(0, 160, 171));
+}
+
+.pushed-btn {
+    background: radial-gradient(rgb(69, 238, 238), rgb(20, 197, 209), rgb(0, 160, 171));
 }
 
 img {     
