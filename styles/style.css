@@ -175,6 +175,7 @@ img {
 .part-frame:hover {
     border: 1px solid #494949;
     background-color: rgba(0, 0, 0, 0.13);
+    cursor: pointer;
 }
 
 .bb-mask-square {
