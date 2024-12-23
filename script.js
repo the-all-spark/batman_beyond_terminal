@@ -44,7 +44,7 @@ function showAll() {
         //console.log(dataAttr);
 
         if ("part" in dataAttr) {
-            hidePrevious(dataAttr.part); // скрыть предыдущие // ? для других кроме частей костюма?
+            hidePrevious(dataAttr.part); // скрыть предыдущие // ? для других кроме частей костюма
             showCostumePart(dataAttr);
         } else {
             console.log("Выбрано что-то другое");
