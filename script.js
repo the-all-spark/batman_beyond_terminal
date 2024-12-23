@@ -113,6 +113,7 @@ function showAll() {
 
     costumePartsAll.forEach( (part) => part.addEventListener("click", function() { 
         hidePrevious(this.dataset.part);
+        markBtnAsPushed(this.dataset);
         showCostumePart(this.dataset);
     }));
 
