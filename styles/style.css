@@ -18,9 +18,19 @@ body {
     align-items: center;
 }
 
+h3 {
+    color: aqua;
+    font-family: Consolas;
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 p {
     color: aqua;
     font-family: Consolas;
+    font-size: 14px;
 }
 
 button {
@@ -32,6 +42,7 @@ button {
     font-size: 14px;
     font-family: Consolas;
     /*border-top: 3px solid #ff0000;*/
+    border-radius: 3px;
 }
 
 button:disabled {
@@ -110,7 +121,7 @@ img {
     grid-area: characteristics-block;
     display: grid;
     grid-template-areas: "costume-block parameters";
-    grid-template-columns: auto 15%;
+    grid-template-columns: auto 17%;
     grid-template-rows: 100%;
     column-gap: 20px;
 }
@@ -125,24 +136,23 @@ img {
     column-gap: 15px;
     justify-items: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 .parameters {
     grid-area: parameters;
     background-color: rgb(26, 27, 30);
-    padding: 15px;
+    padding: 7px;
+    border-radius: 5px;
 }
 
-.parameters p {
-    margin-top: 0;
-}
+/* Блок костюма */
 
 .costume-block img {
     box-sizing: border-box;
     border: 1px solid rgb(26, 27, 30);
+    border-radius: 3px;
 }
-
-/* Блок костюма */
 
 .batman-photo-block {
     grid-area: batman;
@@ -230,6 +240,26 @@ img {
     /*input[type="range" i]:disabled {
         color: aqua;
     }*/
+
+/* Блок параметров */
+
+.parameters p {
+    margin-top: 0;
+    margin-bottom: 7px;
+}
+
+.param-block {
+    box-sizing: border-box;
+    border: 1px solid aqua;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    padding: 7px;
+}
+
+.name {
+    text-decoration: underline; 
+}
+
 
 /* Клавиатура */
 
