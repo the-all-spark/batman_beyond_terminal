@@ -15,7 +15,7 @@
         <!-- Блок часов -->
         <div class="left-screen"> 
             <div class="clock"></div>
-            <p class="city">Gotham</p>
+            <p class="city">Готэм</p> <!-- ! Gotham -->
         </div>
 
         <!-- Блок основной информации -->
@@ -45,7 +45,16 @@
                         <img class="bb-arm part-photo-horizontal" src="" data-part="arm" alt="Arm">
 
 
+
+
                         <!-- TODO Выноски информации -->
+                        <div class="part-info">
+                            <p>
+                                <b>Линзы в маске костюма</b>: выводят всю нужную информацию,  
+                                позволяют переключаться между режимами (ночным, 
+                                инфракрасным и ультрафиолетовым зрениями) 
+                            </p>
+                        </div>
                         
                     </div>
                     
@@ -54,7 +63,8 @@
 
                 <!-- Показатели -->
                 <div class="parameters">
-                    <div class="param-block">
+                    <!-- 
+                    <div class="param-block" data-info="main-info">
                         <p>Имя:</p>  
                         <h3 class="name">Терренс "Терри" МакГиннис</h3> 
                         <p>Пол: Мужской</p>
@@ -65,19 +75,19 @@
                         <p>Волосы: чёрные</p>
                         <p>Статус личности: cкрыта</p>
                     </div>
+                    -->
 
-                    <div data-info="intelligence">
+                    <div class="param-block" data-info="intelligence">
                         <h3>Интеллект</h3>
                         <div class="param">
                             Выше среднего <!-- ! шкалой -->
                         </div>
                         <p class="more-info">Способен мыслить нестандартно, 
-                            хорошо разбирается в технике, неплохо развита дедукция</p> 
+                            хорошо разбирается в технике, неплохо развита дедукция
+                        </p> 
                     </div>
 
-
-
-                    <div>
+                    <div class="param-block selected-param-block">
                         <h3>Strength</h3>
                         <div class="param">
                             <!-- <input orient='0' type='range' min='0' value='8' max='10' disabled /> -->
@@ -90,15 +100,15 @@
 
             <!-- Клавиатуры -->
             <div class="keyboard">
-                <button data-part="mask">Mask</button>
-                <button data-part="chest">Chest</button>
-                <button data-part="arm">Arms</button>
-                <button data-part="belt">Belt</button>
+                <button data-part="mask">Маска</button> <!-- ! Mask -->
+                <button data-part="chest">Торс</button> <!-- ! Chest -->
+                <button data-part="arm">Руки</button> <!-- ! Arms -->
+                <button data-part="belt">Пояс</button> <!-- ! Belt -->
                 <button disabled></button>
                 <button disabled></button>
                 <button disabled></button>
                 <button disabled></button>
-                <button data-action="translate" disabled>Translate</button>
+                <button data-action="translate" disabled>Перевести</button> <!-- ! Translate -->
                 <button disabled></button>
                 <button disabled></button>
                 <button disabled></button>
@@ -107,7 +117,7 @@
                 <button disabled></button>
                 <button disabled></button>
                 <button disabled></button>
-                <button disabled>References</button>
+                <button disabled>Источники</button> <!-- ! References -->
             </div>
         
         </div>
@@ -120,7 +130,7 @@
             </div>
 
             <div>
-                <p>Batmobile</p>
+                <p>Бэтмобиль</p> <!-- ! Batmobile -->
                 <img src="" alt="Бэтмобиль">
             </div>
         
