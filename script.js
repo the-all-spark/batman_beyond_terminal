@@ -131,4 +131,66 @@ function showAll() {
         } );
     });
 
+
+    // TODO динамический вывод информации на страницу
+
+    //console.log(centerScreenParams);
+    //console.log(centerScreenParams.mainInfoRU)
+    
+    showInfoBlock(); // !
+
+    // TODO function showInfoBlock(infoBlock) {...} 
+    // TODO (запустить для каждого из массивов в объекте centerScreenParams)
+    // TODO тогда infoBlock это centerScreenParams.mainInfoRU
+    function showInfoBlock() {
+
+        // ! для mainInfoRU 
+        let divBlock = document.createElement(`${centerScreenParams.mainInfoRU[0].blockTag}`);
+        divBlock.className = `${centerScreenParams.mainInfoRU[0].blockClass}`;
+        divBlock.setAttribute(`data-${centerScreenParams.mainInfoRU[1].dataAttr}`, `${centerScreenParams.mainInfoRU[1].value}`);
+
+        for (let i = 2; i < centerScreenParams.mainInfoRU.length; i++) {
+            let elem = document.createElement(`${centerScreenParams.mainInfoRU[i].tag}`);
+            
+            if (centerScreenParams.mainInfoRU[i].class !== null) {
+                elem.className = `${centerScreenParams.mainInfoRU[i].class}`;
+            }
+
+            elem.innerHTML = `${centerScreenParams.mainInfoRU[i].text}`;
+            divBlock.append(elem);
+        }
+
+        document.querySelector(".parameters").prepend(divBlock);
+    }
 }
+
+// data-info="main-info", правый блок информации (центральный блок)
+/*let mainInfoRU = [
+    {dataAttr: 'info', value: 'main-info', language: "RU"},
+    { tag: 'p', class: null, text: 'Имя:' },
+    { tag: 'h3', class: 'name', text: 'Терренс "Терри" МакГиннис' },
+    { tag: 'p', class: null, text: 'Пол: Мужской' },
+    { tag: 'p', class: null, text: 'Возраст: 17 лет' },
+    { tag: 'p', class: null, text: 'Рост: 1,78 м' },
+    { tag: 'p', class: null, text: 'Вес: 77 кг' },
+    { tag: 'p', class: null, text: 'Глаза: голубые' },
+    { tag: 'p', class: null, text: 'Волосы: чёрные' },
+    { tag: 'p', class: null, text: 'Статус личности: cкрыта' },
+];*/
+
+
+let centerScreenParams = {
+    mainInfoRU: [
+        { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
+        { dataAttr: 'info', value: 'main-info' },
+        { tag: 'p', class: null, text: 'Имя:' },
+        { tag: 'h3', class: 'name', text: 'Терренс "Терри" МакГиннис' },
+        { tag: 'p', class: null, text: 'Пол: Мужской' },
+        { tag: 'p', class: null, text: 'Возраст: 17 лет' },
+        { tag: 'p', class: null, text: 'Рост: 1,78 м' },
+        { tag: 'p', class: null, text: 'Вес: 77 кг' },
+        { tag: 'p', class: null, text: 'Глаза: голубые' },
+        { tag: 'p', class: null, text: 'Волосы: чёрные' },
+        { tag: 'p', class: null, text: 'Статус личности: cкрыта' },
+    ],
+};
