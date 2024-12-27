@@ -122,6 +122,103 @@ function showAll() {
 
 
 
+    
+
+
+    // * Динамический вывод информации на страницу
+    //console.log(centerScreenParams);
+    //console.log(centerScreenParams.mainInfoRU)
+    //console.log(centerScreenParams.intelligenceRU);
+    
+    showInfoBlock(centerScreenParams.mainInfoRU);
+    showInfoBlock(centerScreenParams.intelligenceRU);
+
+    // функция вывода информации по каждому блоку (элементу объекта)
+    function showInfoBlock(infoBlock) {
+
+        // ! для centerScreenParams.mainInfoRU и intelligenceRU
+        let divBlock = document.createElement(`${infoBlock[0].blockTag}`);
+        divBlock.className = `${infoBlock[0].blockClass}`;
+        divBlock.setAttribute(`data-${infoBlock[1].dataAttr}`, `${infoBlock[1].value}`);
+
+        for (let i = 2; i < infoBlock.length; i++) {
+            let elem = document.createElement(`${infoBlock[i].tag}`);
+            
+            if (infoBlock[i].class !== null) {
+                elem.className = `${infoBlock[i].class}`;
+            }
+
+            if (infoBlock[i].class == 'param') {
+                // * Построение полосы характеристики
+                let rectanglesArray = getRectanglesArr(infoBlock[i].text); // получаем в виде массива
+                rectanglesArray.forEach( (rectangle) => elem.append(rectangle) ); // добавляем на страницу элементы массива
+            } else {
+                elem.innerHTML = `${infoBlock[i].text}`;
+            }
+
+            // ! если класс more-info - создать доп иконку открытия информации
+            //! отдельно ее стили (позиционирование) в css
+            /* if (infoBlock[i].class == 'more-info') {
+
+            } */
+
+            divBlock.append(elem);
+        }
+        document.querySelector(".parameters").append(divBlock);
+    }
+
+    // функция сборки полосы с параметрами (принимает массив объектов из свойства text)
+    function getRectanglesArr(paramObject) {
+        console.log(paramObject);
+        
+        let filledArray = constructRectanglesArr(paramObject, 'filled'); 
+        //console.log(filledArray);
+
+        let emptyArray = constructRectanglesArr(paramObject, 'empty'); 
+        //console.log(emptyArray);
+
+        let  resultArray = [];
+
+        filledArray.forEach( (elem) => resultArray.push(elem) );
+        emptyArray.forEach( (elem) => resultArray.push(elem) );
+
+        //console.log(resultArray);
+        return resultArray;       
+    }
+
+    // функция построения полосы характеристики:
+    // принимает массив объектов и флаг ('filled' или 'empty')
+    // возвращает массив элементов
+    function constructRectanglesArr(params, flag) {
+        //console.log(flag);
+
+        let amount;
+        if (flag === 'filled') {
+            amount = params[0].param;
+        } else {
+            amount = 10 - params[0].param;
+        }
+        //console.log(amount);
+
+        let elementsArray = [];
+        for (let i = 0; i < amount; i++) {
+            let element = document.createElement(`${params[0].tag}`);
+
+            if (flag === 'filled') {
+                element.className = `${params[0].class}`;
+            } else {
+                element.className = `${params[1].class}`;
+            }
+            elementsArray.push(element);
+        }
+
+        return elementsArray;
+    }
+
+
+
+
+
     // * Запрет перетаскивания изображений
     let allImg = document.querySelectorAll("img");
 
@@ -131,37 +228,6 @@ function showAll() {
         } );
     });
 
-
-    // TODO динамический вывод информации на страницу
-
-    //console.log(centerScreenParams);
-    //console.log(centerScreenParams.mainInfoRU)
-    
-    showInfoBlock(); // !
-
-    // TODO function showInfoBlock(infoBlock) {...} 
-    // TODO (запустить для каждого из массивов в объекте centerScreenParams)
-    // TODO тогда infoBlock это centerScreenParams.mainInfoRU
-    function showInfoBlock() {
-
-        // ! для mainInfoRU 
-        let divBlock = document.createElement(`${centerScreenParams.mainInfoRU[0].blockTag}`);
-        divBlock.className = `${centerScreenParams.mainInfoRU[0].blockClass}`;
-        divBlock.setAttribute(`data-${centerScreenParams.mainInfoRU[1].dataAttr}`, `${centerScreenParams.mainInfoRU[1].value}`);
-
-        for (let i = 2; i < centerScreenParams.mainInfoRU.length; i++) {
-            let elem = document.createElement(`${centerScreenParams.mainInfoRU[i].tag}`);
-            
-            if (centerScreenParams.mainInfoRU[i].class !== null) {
-                elem.className = `${centerScreenParams.mainInfoRU[i].class}`;
-            }
-
-            elem.innerHTML = `${centerScreenParams.mainInfoRU[i].text}`;
-            divBlock.append(elem);
-        }
-
-        document.querySelector(".parameters").prepend(divBlock);
-    }
 }
 
 // data-info="main-info", правый блок информации (центральный блок)
@@ -178,7 +244,7 @@ function showAll() {
     { tag: 'p', class: null, text: 'Статус личности: cкрыта' },
 ];*/
 
-
+// Информация для центрального правого экрана - "Параметры"
 let centerScreenParams = {
     mainInfoRU: [
         { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
@@ -192,5 +258,17 @@ let centerScreenParams = {
         { tag: 'p', class: null, text: 'Глаза: голубые' },
         { tag: 'p', class: null, text: 'Волосы: чёрные' },
         { tag: 'p', class: null, text: 'Статус личности: cкрыта' },
+    ],
+    intelligenceRU: [
+        { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
+        { dataAttr: 'param', value: 'intelligence' },
+        { tag: 'h3', class: null, text: 'Интеллект' },
+        { tag: 'div', class: 'param', text: 
+            [ 
+                { tag: 'div', class: 'filled-rectangle param-rectangle', param: 7 },
+                { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
+            ]
+        },
+        { tag: 'p', class: 'more-info', text: 'Способен мыслить нестандартно, хорошо разбирается в технике, неплохо развита дедукция' },
     ],
 };
