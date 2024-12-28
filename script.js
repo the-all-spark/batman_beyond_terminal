@@ -44,11 +44,10 @@ function showAll() {
         //console.log(dataAttr);
 
         if ("part" in dataAttr) {
-            hidePrevious(dataAttr.part); // скрыть предыдущие // ? для других кроме частей костюма
+            hidePrevious(dataAttr.part); // скрыть предыдущие выделения
             showCostumePart(dataAttr);
         } else {
-            console.log("Выбрано что-то другое");
-            // TODO вставить другую функцию
+            highlightInfoBlock(dataAttr); // выделить блок с информацией
         }
     }
 
@@ -80,13 +79,19 @@ function showAll() {
                 image.classList.remove("shown-part-photo");
             }
         });
+
+        // выделенные блоки с информацией
+        let previousShownInfoBlocks = document.querySelectorAll(".selected-param-block");
+        previousShownInfoBlocks.forEach( (info) => {
+            info.classList.remove("selected-param-block");
+        });
     }
     
     // функция отображения рамки при клике на часть костюма
     function showFrame(part) {
         let selectedCostumePart = document.querySelector(`.batman-photo-block div[data-part="${part}"]`);
+        
         //selectedCostumePart.classList.toggle("selected-part-frame");
-
         if (selectedCostumePart.classList.contains("selected-part-frame")) {
             selectedCostumePart.classList.remove("selected-part-frame"); 
         } else {
@@ -97,19 +102,17 @@ function showAll() {
     // функция отображения увеличенного изображения части костюма
     function showZoomedImage(part) {
         let selectedCostumePart = document.querySelector(`.info img[data-part="${part}"]`);
+        
         //selectedCostumePart.classList.toggle("shown-part-photo");
-
         if (selectedCostumePart.classList.contains("shown-part-photo")) {
             selectedCostumePart.classList.remove("shown-part-photo"); 
         } else {
             selectedCostumePart.classList.add("shown-part-photo");
         }
-
     }
 
     // * Открытие увеличенного изображения при клике на рамку фрагмента костюма на фото
     let costumePartsAll = document.querySelectorAll(".part-frame");
-    //console.log(costumePartsAll);
 
     costumePartsAll.forEach( (part) => part.addEventListener("click", function() { 
         hidePrevious(this.dataset.part);
@@ -117,12 +120,46 @@ function showAll() {
         showCostumePart(this.dataset);
     }));
 
+    // * функция выделение блока информации при клике на кнопку
+    function highlightInfoBlock(dataAttr) {
+        //console.log(dataAttr);
+        let attr = Object.keys(dataAttr)[0];
+        let value = Object.values(dataAttr)[0];
 
+        let selectedParamBlock = document.querySelector(`.param-block[data-${attr}="${value}"]`);
+        //console.log(selectedParamBlock);
 
+        if (selectedParamBlock.classList.contains("selected-param-block")) {
+            selectedParamBlock.classList.remove("selected-param-block");
+        } else {
+            selectedParamBlock.classList.add("selected-param-block");
+        }
+        
+       hidePreviousAll(value);
+    }
 
+    // функция скрытия предыдущих рамок, изображений частей костюмов и выделенных полос параметров
+    // принимает значение атрибута data-param (элемент не должен быть скрыт) 
+    function hidePreviousAll(value) {
 
+        // рамки
+        let previousSelectedFrames = document.querySelectorAll(".selected-part-frame");
+        previousSelectedFrames.forEach( (frame) =>  frame.classList.remove("selected-part-frame") );
 
-    
+        // изображения
+        let previousShownImages = document.querySelectorAll(".shown-part-photo");
+        previousShownImages.forEach( (image) => image.classList.remove("shown-part-photo") );
+
+        // выделенные блоки с информацией 
+        let previousShownInfoBlocks = document.querySelectorAll(".selected-param-block");
+        previousShownInfoBlocks.forEach( (info) => {
+            if (info.dataset.param !== value) {
+                info.classList.remove("selected-param-block");
+            }
+        });
+        
+    }
+
 
 
     // * Динамический вывод информации на страницу
@@ -132,6 +169,7 @@ function showAll() {
     
     showInfoBlock(centerScreenParams.mainInfoRU);
     showInfoBlock(centerScreenParams.intelligenceRU);
+    showInfoBlock(centerScreenParams.strengthRU);
 
     // функция вывода информации по каждому блоку (элементу объекта)
     function showInfoBlock(infoBlock) {
@@ -169,7 +207,7 @@ function showAll() {
 
     // функция сборки полосы с параметрами (принимает массив объектов из свойства text)
     function getRectanglesArr(paramObject) {
-        console.log(paramObject);
+        //console.log(paramObject);
         
         let filledArray = constructRectanglesArr(paramObject, 'filled'); 
         //console.log(filledArray);
@@ -215,7 +253,7 @@ function showAll() {
         return elementsArray;
     }
 
-
+    
 
 
 
@@ -270,5 +308,17 @@ let centerScreenParams = {
             ]
         },
         { tag: 'p', class: 'more-info', text: 'Способен мыслить нестандартно, хорошо разбирается в технике, неплохо развита дедукция' },
+    ],
+    strengthRU: [
+        { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
+        { dataAttr: 'param', value: 'strength' },
+        { tag: 'h3', class: null, text: 'Сила и выносливость' },
+        { tag: 'div', class: 'param', text: 
+            [ 
+                { tag: 'div', class: 'filled-rectangle param-rectangle', param: 9 },
+                { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
+            ]
+        },
+        { tag: 'p', class: 'more-info', text: '...' },
     ],
 };
