@@ -153,7 +153,8 @@ function showAll() {
         // выделенные блоки с информацией 
         let previousShownInfoBlocks = document.querySelectorAll(".selected-param-block");
         previousShownInfoBlocks.forEach( (info) => {
-            if (info.dataset.param !== value) {
+            let parameter = Object.values(info.dataset)[0];
+            if (parameter != value) {
                 info.classList.remove("selected-param-block");
             }
         });
