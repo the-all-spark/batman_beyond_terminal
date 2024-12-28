@@ -21,7 +21,7 @@ body {
 h3 {
     color: aqua;
     font-family: Consolas;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 10px;
@@ -30,7 +30,7 @@ h3 {
 p {
     color: aqua;
     font-family: Consolas;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 button {
@@ -43,6 +43,7 @@ button {
     font-family: Consolas;
     /*border-top: 3px solid #ff0000;*/
     border-radius: 3px;
+    color: rgb(26, 27, 30);
 }
 
 button:disabled {
@@ -121,7 +122,7 @@ img {
     grid-area: characteristics-block;
     display: grid;
     grid-template-areas: "costume-block parameters";
-    grid-template-columns: auto 17%;
+    grid-template-columns: auto 18%;
     grid-template-rows: 100%;
     column-gap: 20px;
 }
@@ -258,7 +259,7 @@ img {
 
 .parameters p {
     margin-top: 0;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
 }
 
 .param-block {
@@ -286,6 +287,15 @@ img {
 .selected-param-block h3,
 .selected-param-block p {
     color:  rgb(26, 27, 30);
+}
+
+.selected-param-block .filled-rectangle {
+    /*background-color: rgb(26, 27, 30);*/
+    background-color: rgb(33, 33, 33);
+}
+
+.selected-param-block .empty-rectangle {
+    background-color: gray;
 }
 
 .param {
