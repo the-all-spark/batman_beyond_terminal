@@ -124,7 +124,7 @@ img {
     grid-template-areas: "costume-block parameters";
     grid-template-columns: auto 18%;
     grid-template-rows: 100%;
-    column-gap: 20px;
+    column-gap: 15px;
 }
 
 .costume-block {
@@ -268,34 +268,26 @@ img {
     border-radius: 3px;
     margin-bottom: 10px;
     padding: 7px;
+    position: relative;
 }
 
 .more-info {
     display: none;
 }
 
+.info-icon-block {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.info-icon-block svg:hover {
+    cursor: pointer;
+}
+
 .name {
     text-decoration: underline; 
     margin-top: 10px;
-}
-
-.selected-param-block {
-    border: 1px solid rgb(26, 27, 30);
-    background-color: aqua;
-}
-
-.selected-param-block h3,
-.selected-param-block p {
-    color:  rgb(26, 27, 30);
-}
-
-.selected-param-block .filled-rectangle {
-    /*background-color: rgb(26, 27, 30);*/
-    background-color: rgb(33, 33, 33);
-}
-
-.selected-param-block .empty-rectangle {
-    background-color: gray;
 }
 
 .param {
@@ -317,6 +309,37 @@ img {
 .empty-rectangle {
     background-color: gray;
 }
+
+/* Выделенный блок с информацией */
+
+.selected-param-block {
+    border: 1px solid rgb(26, 27, 30);
+    background-color: aqua;
+}
+
+.selected-param-block h3,
+.selected-param-block p {
+    color:  rgb(26, 27, 30);
+}
+
+.selected-param-block .filled-rectangle {
+    /*background-color: rgb(26, 27, 30);*/
+    background-color: rgb(33, 33, 33);
+}
+
+.selected-param-block .empty-rectangle {
+    background-color: gray;
+}
+
+.selected-param-block svg path {
+    fill: rgb(33, 33, 33);
+}
+
+.selected-param-block svg circle {
+    stroke: rgb(33, 33, 33);
+}
+
+ 
 
 /* Клавиатура */
 
