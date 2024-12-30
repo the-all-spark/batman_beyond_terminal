@@ -242,6 +242,7 @@ img {
     padding: 7px;
     border-radius: 3px;
     background-color: white;
+    width: 45%;
 }
 
 .part-info p {
@@ -355,10 +356,27 @@ img {
 }
 
 /* Правый блок - транспорт, символ */
+
 .bb-symbol img {
     width: 100%;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 5px 5px 12px 5px;
+}
+
+.right-screen .param-block {
+    padding: 10px;
+}
+
+.right-screen .param-block p {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+.transport-photo img {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(26, 27, 30);
+    border-radius: 3px;
 }
 
 
