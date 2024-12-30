@@ -164,18 +164,18 @@ function showAll() {
 
 
     // * Динамический вывод информации на страницу
-    //console.log(centerScreenParams);
-    //console.log(centerScreenParams.mainInfoRU)
-    //console.log(centerScreenParams.intelligenceRU);
     
-    showInfoBlock(centerScreenParams.mainInfoRU);
-    showInfoBlock(centerScreenParams.intelligenceRU);
-    showInfoBlock(centerScreenParams.strengthRU);
+    let mainInfo = constructInfoBlock(rightScreenInfo.mainInfoRU);
+    let intelligenceParam = constructInfoBlock(centerScreenParams.intelligenceRU);
+    let strengthParam = constructInfoBlock(centerScreenParams.strengthRU);
 
-    // функция вывода информации по каждому блоку (элементу объекта)
-    function showInfoBlock(infoBlock) {
+    document.querySelector(".parameters").append(intelligenceParam);
+    document.querySelector(".parameters").append(strengthParam);
+    document.querySelector(".bb-symbol").append(mainInfo);
 
-        // ! для centerScreenParams.mainInfoRU и intelligenceRU
+    // * функция вывода информации по каждому блоку (элементу объекта)
+    function constructInfoBlock(infoBlock) {
+
         let divBlock = document.createElement(`${infoBlock[0].blockTag}`);
         divBlock.className = `${infoBlock[0].blockClass}`;
         divBlock.setAttribute(`data-${infoBlock[1].dataAttr}`, `${infoBlock[1].value}`);
@@ -195,7 +195,7 @@ function showAll() {
                 elem.innerHTML = `${infoBlock[i].text}`;
             }
 
-            // если есть элемент с классом more-info - создать доп. иконку открытия информации
+            // * Если есть элемент с классом more-info - создать доп. иконку открытия информации
             if (infoBlock[i].class == 'more-info' && infoBlock[i].text !== '') {
                 let infoIcon = constructInfoIcon();
                 divBlock.prepend(infoIcon);
@@ -203,7 +203,8 @@ function showAll() {
 
             divBlock.append(elem);
         }
-        document.querySelector(".parameters").append(divBlock);
+
+        return divBlock;
     }
 
     // функция сборки полосы с параметрами (принимает массив объектов из свойства text)
@@ -213,7 +214,7 @@ function showAll() {
         let filledArray = constructRectanglesArr(paramObject, 'filled'); 
         //console.log(filledArray);
 
-        let emptyArray = constructRectanglesArr(paramObject, 'empty'); 
+        let emptyArray = constructRectanglesArr(paramObject); 
         //console.log(emptyArray);
 
         let  resultArray = [];
@@ -228,7 +229,7 @@ function showAll() {
     // функция построения полосы характеристики:
     // принимает массив объектов и флаг ('filled' или 'empty')
     // возвращает массив элементов
-    function constructRectanglesArr(params, flag) {
+    function constructRectanglesArr(params, flag = 'empty') {
         //console.log(flag);
 
         let amount;
@@ -287,35 +288,8 @@ function showAll() {
 
 }
 
-// data-info="main-info", правый блок информации (центральный блок)
-/*let mainInfoRU = [
-    {dataAttr: 'info', value: 'main-info', language: "RU"},
-    { tag: 'p', class: null, text: 'Имя:' },
-    { tag: 'h3', class: 'name', text: 'Терренс "Терри" МакГиннис' },
-    { tag: 'p', class: null, text: 'Пол: Мужской' },
-    { tag: 'p', class: null, text: 'Возраст: 17 лет' },
-    { tag: 'p', class: null, text: 'Рост: 1,78 м' },
-    { tag: 'p', class: null, text: 'Вес: 77 кг' },
-    { tag: 'p', class: null, text: 'Глаза: голубые' },
-    { tag: 'p', class: null, text: 'Волосы: чёрные' },
-    { tag: 'p', class: null, text: 'Статус личности: cкрыта' },
-];*/
-
 // Информация для центрального правого экрана - "Параметры"
 let centerScreenParams = {
-    mainInfoRU: [
-        { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
-        { dataAttr: 'info', value: 'main-info' },
-        { tag: 'p', class: null, text: 'Имя:' },
-        { tag: 'h3', class: 'name', text: 'Терренс "Терри" МакГиннис' },
-        { tag: 'p', class: null, text: 'Пол: Мужской' },
-        { tag: 'p', class: null, text: 'Возраст: 17 лет' },
-        { tag: 'p', class: null, text: 'Рост: 1,78 м' },
-        { tag: 'p', class: null, text: 'Вес: 77 кг' },
-        { tag: 'p', class: null, text: 'Глаза: голубые' },
-        { tag: 'p', class: null, text: 'Волосы: чёрные' },
-        { tag: 'p', class: null, text: 'Статус личности: cкрыта' },
-    ],
     intelligenceRU: [
         { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
         { dataAttr: 'param', value: 'intelligence' },
@@ -339,5 +313,22 @@ let centerScreenParams = {
             ]
         },
         { tag: 'p', class: 'more-info', text: '' },
+    ],
+};
+
+// Информация для правого экрана - "Основное"
+let rightScreenInfo = {
+    mainInfoRU: [
+        { language: "RU", blockTag: 'div', blockClass: 'param-block' }, 
+        { dataAttr: 'info', value: 'main-info' },
+        { tag: 'p', class: null, text: '<ins>Имя</ins>:' },
+        { tag: 'h3', class: 'name', text: 'Терренс "Терри" МакГиннис' },
+        { tag: 'p', class: null, text: '<ins>Пол</ins>: Мужской' },
+        { tag: 'p', class: null, text: '<ins>Возраст</ins>: 17 лет' },
+        { tag: 'p', class: null, text: '<ins>Рост</ins>: 1,78 м' },
+        { tag: 'p', class: null, text: '<ins>Вес</ins>: 77 кг' },
+        { tag: 'p', class: null, text: '<ins>Глаза</ins>: голубые' },
+        { tag: 'p', class: null, text: '<ins>Волосы</ins>: чёрные' },
+        { tag: 'p', class: null, text: '<ins>Статус личности</ins>: cкрыта' },
     ],
 };
