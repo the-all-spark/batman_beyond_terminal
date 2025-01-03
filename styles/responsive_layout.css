@@ -1,0 +1,115 @@
+/* --------------- Media Queries ----------------- */
+
+@media screen and (max-width: 1500px) {
+    .costume-block {
+        grid-template-columns: 28% auto 28%;
+        column-gap: 5px;
+    }
+
+
+}
+
+@media screen and (max-width: 1400px) {
+    .terminal {
+        column-gap: 15px;
+    }
+
+
+}
+
+@media screen and (max-width: 1350px) {
+    .costume-block {
+        grid-template-columns: 30% auto 30%;
+    }
+    .info-block {
+        width: auto;
+        height: auto;
+        z-index: 99;
+        position: absolute;
+        left: 220px;
+        right: 5px;
+        bottom: 5px;
+        top: 5px;
+        padding: 20px;
+    }
+
+    .info {
+        position: relative;
+    }
+    .shown-part-photo {
+        position: absolute;
+    }
+
+
+}
+
+@media screen and (max-width: 1260px) {
+    .costume-block {
+        grid-template-columns: 33% auto 33%;
+    }
+
+
+}
+
+@media screen and (max-width: 1140px) {
+    .costume-block {
+        grid-template-columns: 35% auto 35%;
+    }
+
+
+}
+
+@media screen and (max-width: 1100px) {
+    .costume-block {
+        grid-template-columns: 37% auto 37%;
+    }
+
+
+}
+
+@media screen and (max-width: 1050px) {
+    .costume-block {
+        grid-template-columns: 40% auto 40%;
+        column-gap: 0;
+    }
+    .info-block {
+        right: 8px;
+        padding: 10px;
+    }
+
+
+}
+
+@media screen and (max-width: 990px) {
+    .costume-block {
+        grid-template-columns: 43% auto 43%;
+    }
+    .info-block {
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
+        top: 8px;
+        padding: 20px;
+    }
+
+}
+
+@media screen and (max-width: 930px) {
+    .costume-block {
+        grid-template-columns: 48% auto 48%;
+    }
+    .info-block {
+        right: 5px;
+        left: 5px;
+        bottom: 5px;
+        top: 5px;
+    }
+
+}
+
+@media screen and (max-width: 830px) {
+    .costume-block {
+        grid-template-columns: 50% auto 50%;
+    }
+
+}
