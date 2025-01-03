@@ -73,7 +73,7 @@ function showAll() {
 
         if (pushedButton.classList.contains("pushed-btn") && shownCostumeInfo == null) {
             let costumeInfo = constructCostumeInfo(costume);
-            document.querySelector(".info").append(costumeInfo);
+            document.querySelector(".info").before(costumeInfo);
         } else {
             let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
             previousCostumeInfo.forEach( (info) => info.remove() );
