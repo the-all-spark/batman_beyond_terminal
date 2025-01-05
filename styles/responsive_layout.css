@@ -22,20 +22,12 @@
         grid-template-columns: 30% auto 30%;
     }
     .info-block {
-        width: auto;
-        height: auto;
-        z-index: 99;
-        position: absolute;
-        left: 220px;
         right: 5px;
         bottom: 5px;
         top: 5px;
         padding: 20px;
     }
 
-    .info {
-        position: relative;
-    }
     .shown-part-photo {
         position: absolute;
     }
