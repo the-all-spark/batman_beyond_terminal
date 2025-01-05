@@ -1,6 +1,7 @@
 window.addEventListener("load", showAll);
 
 function showAll() {
+    console.log(window.innerWidth);
 
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard button"));
     //console.log(keyboardButtons);
@@ -8,6 +9,7 @@ function showAll() {
     // * Выбор действия при клике на кнопку "клавиатуры", эффект нажатой кнопки
     keyboardButtons.forEach((button) => button.addEventListener("click", function () {
         markBtnAsPushed(this.dataset);
+        showHideRightPhoto(this.dataset);
         chooseAction(this.dataset);
     }));
 
@@ -37,6 +39,17 @@ function showAll() {
         previousMarkedBtns.forEach((button) => {
             button.classList.remove("pushed-btn");
         });
+    }
+
+    // функция скрывает или возвращает фотографию справа в зависимости от значения атрибута и ширины экрана
+    function showHideRightPhoto(dataAttr) {
+        let photo = document.querySelector(".terry-photo");
+
+        if (Object.keys(dataAttr)[0] === 'part' && window.innerWidth <= 1260) {
+            photo.style.display = "none";
+        } else {
+            photo.style.display = "block";
+        }
     }
 
     // функция выбора действия в зависимости от атрибута data
