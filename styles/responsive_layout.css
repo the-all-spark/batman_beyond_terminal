@@ -40,6 +40,12 @@
         grid-template-columns: 33% auto 33%;
     }
 
+    .keyboard {
+        padding: 8px;
+    }
+    button {
+        width: 10.8%;
+    }
 
 }
 
@@ -47,13 +53,19 @@
     .costume-block {
         grid-template-columns: 35% auto 35%;
     }
-
+    button {
+        font-size: 13px;
+    }
 
 }
 
 @media screen and (max-width: 1100px) {
     .costume-block {
         grid-template-columns: 37% auto 37%;
+    }
+
+    button {
+        padding: 1px 3px;
     }
 
 
@@ -69,7 +81,14 @@
         padding: 10px;
     }
 
-
+    button {
+        width: 100px;
+        height: 28px;
+    }
+    .keyboard {
+        padding: 5px;
+    }
+   
 }
 
 @media screen and (max-width: 990px) {
@@ -97,6 +116,23 @@
         top: 5px;
     }
 
+    button {
+        width: 90px;
+    }
+
+}
+
+@media screen and (max-width: 860px) {
+    button {
+        width: 80px;
+    }
+
+    .part-photo-horizontal {
+        width: 28vh;
+    }
+
+
+
 }
 
 @media screen and (max-width: 830px) {
@@ -104,4 +140,15 @@
         grid-template-columns: 50% auto 50%;
     }
 
+    .part-photo-horizontal {
+        width: 26vh;
+    }
+
+
+
 }
+
+/* ! крайний размер до появления горизонтальной прокрутки => перестраивание блоков */
+/* @media screen and (max-width: 830px) {
+
+}*/
