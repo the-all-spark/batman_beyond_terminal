@@ -60,17 +60,23 @@ function showAll() {
 
     // функция выбора действия в зависимости от атрибута data
     function chooseAction(dataAttr) {
-        console.log(dataAttr);
+        //console.log(dataAttr);
+
+        if ("costume" in dataAttr) {
+            showCostumeInfo(dataAttr.costume);
+            hidePrevious(dataAttr); // скрыть предыдущие выделения
+        } 
 
         if ("part" in dataAttr) {
-            hidePrevious(dataAttr.part); // скрыть предыдущие выделения
             showCostumePart(dataAttr);
-        } else if ("costume" in dataAttr) {
-            showCostumeInfo(dataAttr.costume);
-            hidePrevious(dataAttr.costume); // скрыть предыдущие выделения
-        } else {
+            hidePrevious(dataAttr); // скрыть предыдущие выделения
+        } 
+        
+        if ("param" in dataAttr || "info" in dataAttr) {
+            hidePrevious(dataAttr);
             highlightInfoBlock(dataAttr); // выделить блок с информацией
-        }
+        } 
+
     }
 
     // * Выделение части костюма рамкой и отображение увеличенного фрагмента при клике на кнопку
@@ -95,7 +101,7 @@ function showAll() {
             document.querySelector(".info").before(costumeInfo);
         } else {
             let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
-            previousCostumeInfo.forEach( (info) => info.remove() ); //!
+            previousCostumeInfo.forEach( (info) => info.remove() );
         }
     }
 
@@ -108,7 +114,6 @@ function showAll() {
         let divBlock = document.createElement(`${centerScreenInfo.costumeInfo[0].blockTag}`);
         divBlock.className = `${centerScreenInfo.costumeInfo[0].blockClass}`;
         divBlock.setAttribute(`data-${centerScreenInfo.costumeInfo[1].dataAttr}`, `${centerScreenInfo.costumeInfo[1].value}`);
-        console.log(divBlock);
 
         for (let i = 2; i < centerScreenInfo.costumeInfo.length; i++) {
             let elem = document.createElement(`${centerScreenInfo.costumeInfo[i].tag}`);
@@ -145,9 +150,10 @@ function showAll() {
         return resultItemArray; 
     }
 
-    // * функция скрытия предыдущих показанных рамок и изображений (кроме текущего)
-    function hidePrevious(dataAttrValue) {
-
+    // * функция скрытия предыдущих показанных рамок, изображений, блоков параметров (кроме текущего dataAttr)
+    function hidePrevious(dataAttr) {
+        let dataAttrValue = Object.values(dataAttr)[0]; // значение текущего элемента
+    
         // рамки
         let previousSelectedFrames = document.querySelectorAll(".selected-part-frame");
         previousSelectedFrames.forEach( (frame) => {
@@ -166,16 +172,18 @@ function showAll() {
 
         // выделенные блоки с информацией
         let previousShownInfoBlocks = document.querySelectorAll(".selected-param-block");
-        previousShownInfoBlocks.forEach( (info) => {
-            info.classList.remove("selected-param-block");
+        previousShownInfoBlocks.forEach((info) => {
+            let parameter = Object.values(info.dataset)[0];
+            if (parameter != dataAttrValue) {
+                info.classList.remove("selected-param-block");
+            }
         });
 
         // информация о костюме
         let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
         previousCostumeInfo.forEach( (info) => {
             if (info.dataset.costume !== dataAttrValue) {
-                console.log("hidePrevious()");
-                info.remove(); //!
+                info.remove();
             }
         });
 
@@ -221,50 +229,15 @@ function showAll() {
         let value = Object.values(dataAttr)[0];
 
         let selectedParamBlock = document.querySelector(`.param-block[data-${attr}="${value}"]`);
-        //console.log(selectedParamBlock);
 
         if (selectedParamBlock.classList.contains("selected-param-block")) {
             selectedParamBlock.classList.remove("selected-param-block");
         } else {
             selectedParamBlock.classList.add("selected-param-block");
         }
-
-        hidePreviousAll(value);
     }
 
-    // функция скрытия предыдущих рамок, изображений частей костюмов и выделенных полос параметров
-    // принимает значение атрибута data-param (элемент не должен быть скрыт) 
-    function hidePreviousAll(dataAttrValue) {
-
-        // рамки
-        let previousSelectedFrames = document.querySelectorAll(".selected-part-frame");
-        previousSelectedFrames.forEach((frame) => frame.classList.remove("selected-part-frame"));
-
-        // изображения
-        let previousShownImages = document.querySelectorAll(".shown-part-photo");
-        previousShownImages.forEach((image) => image.classList.remove("shown-part-photo"));
-
-        // выделенные блоки с информацией 
-        let previousShownInfoBlocks = document.querySelectorAll(".selected-param-block");
-        previousShownInfoBlocks.forEach((info) => {
-            let parameter = Object.values(info.dataset)[0];
-            if (parameter != dataAttrValue) {
-                info.classList.remove("selected-param-block");
-            }
-        });
-
-        // информация о костюме //!
-        let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
-        previousCostumeInfo.forEach( (info) => {
-            if (info.dataset.costume !== dataAttrValue) {
-                console.log("hidePreviousAll()");
-                info.classList.remove("shown-info-block");
-            }
-        });
-
-    }
-
-
+    
 
     // * Динамический вывод информации на страницу
 
