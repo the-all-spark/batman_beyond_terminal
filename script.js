@@ -50,6 +50,12 @@ function showAll() {
         } else {
             photo.style.display = "block";
         }
+
+        // если не нажата ни одна из кнопок на клавиатуре
+        let pushedBtns = document.querySelectorAll(".pushed-btn");
+        if (pushedBtns.length == 0 )  {
+            photo.style.display = "block";
+        }
     }
 
     // функция выбора действия в зависимости от атрибута data
@@ -89,7 +95,7 @@ function showAll() {
             document.querySelector(".info").before(costumeInfo);
         } else {
             let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
-            previousCostumeInfo.forEach( (info) => info.remove() );
+            previousCostumeInfo.forEach( (info) => info.remove() ); //!
         }
     }
 
@@ -168,7 +174,8 @@ function showAll() {
         let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
         previousCostumeInfo.forEach( (info) => {
             if (info.dataset.costume !== dataAttrValue) {
-                info.remove();
+                console.log("hidePrevious()");
+                info.remove(); //!
             }
         });
 
@@ -246,10 +253,11 @@ function showAll() {
             }
         });
 
-        // информация о костюме
+        // информация о костюме //!
         let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
         previousCostumeInfo.forEach( (info) => {
             if (info.dataset.costume !== dataAttrValue) {
+                console.log("hidePreviousAll()");
                 info.classList.remove("shown-info-block");
             }
         });
