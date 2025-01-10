@@ -3,13 +3,12 @@ window.addEventListener("load", showAll);
 function showAll() {
     //console.log(window.innerWidth);
 
+    // Скрытие информационного блока при клике на кнопку "ОК"
     let helpBlockBtn = document.querySelector(".help-block button");
-    helpBlockBtn.addEventListener("click", hideShowHelpBlock);
-
-    function hideShowHelpBlock() {
+    helpBlockBtn.addEventListener("click", function () {
         let helpBlock = document.querySelector(".help-block");
         helpBlock.classList.add("hidden-help-block");
-    }
+    });
 
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard button"));
     //console.log(keyboardButtons);
@@ -71,11 +70,13 @@ function showAll() {
         //console.log(dataAttr);
 
         if ("costume" in dataAttr) {
+            hideShowHelpBlock();
             showCostumeInfo(dataAttr.costume);
             hidePrevious(dataAttr); // скрыть предыдущие выделения
         } 
 
         if ("part" in dataAttr) {
+            hideShowHelpBlock();
             showCostumePart(dataAttr);
             hidePrevious(dataAttr); // скрыть предыдущие выделения
         } 
@@ -85,6 +86,47 @@ function showAll() {
             highlightInfoBlock(dataAttr); // выделить блок с информацией
         } 
 
+    }
+
+    // функция скрытия и показа информационного блока в центре экрана
+    function hideShowHelpBlock() {
+        let helpBlock = document.querySelector(".help-block");
+
+        let btnsForCenterBlock = getBtnsForCenterBlock();
+        //console.log(btnsForCenterBlock);
+        let markedBtnFlag = isMarked(btnsForCenterBlock);
+
+        // блок скрывается, если кнопка выделена, отображается, если нет
+        if (markedBtnFlag) {
+            helpBlock.classList.add("hidden-help-block");
+        } else {
+            helpBlock.classList.remove("hidden-help-block");
+        }
+    }
+
+    // функция получения массива всех кнопок для отображения информации в центральном блоке (data-costume, data-part)
+    function getBtnsForCenterBlock() {
+        let costumeBtn = document.querySelectorAll("button[data-costume]");
+        let partBtns = document.querySelectorAll("button[data-part]");
+
+        let btnsForCenterBlock = [];
+
+        costumeBtn.forEach( (btn) => btnsForCenterBlock.push(btn) );
+        partBtns.forEach( (btn) => btnsForCenterBlock.push(btn) ); 
+
+        return btnsForCenterBlock;
+    }
+
+    // функция определения нажата ли какая-то кнопка из центрального блока
+    function isMarked(buttons) {
+        let markedBtns = buttons.filter( (btn) => btn.classList.contains("pushed-btn") );
+        //console.log(markedBtns);
+
+        if (markedBtns.length >= 1) {
+            return true;
+        } else {
+            return false;
+        } 
     }
 
     // * Выделение части костюма рамкой и отображение увеличенного фрагмента при клике на кнопку
