@@ -1,7 +1,15 @@
 window.addEventListener("load", showAll);
 
 function showAll() {
-    console.log(window.innerWidth);
+    //console.log(window.innerWidth);
+
+    let helpBlockBtn = document.querySelector(".help-block button");
+    helpBlockBtn.addEventListener("click", hideShowHelpBlock);
+
+    function hideShowHelpBlock() {
+        let helpBlock = document.querySelector(".help-block");
+        helpBlock.classList.add("hidden-help-block");
+    }
 
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard button"));
     //console.log(keyboardButtons);

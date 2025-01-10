@@ -331,6 +331,9 @@ img {
     padding: 0;
 }
 
+.help-block.hidden-help-block {
+    display: none;
+}
 
 /* Блок параметров */
 
