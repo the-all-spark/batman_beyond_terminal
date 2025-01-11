@@ -307,14 +307,14 @@ img {
     align-self: center;
     display: grid;
     grid-template-areas: "text ok-button";
-    grid-template-columns: auto 12%;
+    grid-template-columns: auto;
     grid-template-rows: 100%;
     align-items: center;
     column-gap: 15px;
-    padding: 20px 17px;
+    padding: 20px 15px;
     background-color: white;
     border-radius: 3px;
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -328,7 +328,7 @@ img {
 .help-block button {
     width: 100%; 
     border: 1px solid rgb(26, 27, 30);
-    padding: 0;
+    padding: 0 5px;
 }
 
 .help-block.hidden-help-block {
