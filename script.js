@@ -8,6 +8,7 @@ function showAll() {
     helpBlockBtn.addEventListener("click", function () {
         let helpBlock = document.querySelector(".help-block");
         helpBlock.classList.add("hidden-help-block");
+        helpBlock.classList.add("closed-flag");
     });
 
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard button"));
@@ -96,10 +97,11 @@ function showAll() {
         //console.log(btnsForCenterBlock);
         let markedBtnFlag = isMarked(btnsForCenterBlock);
 
-        // блок скрывается, если кнопка выделена, отображается, если нет
+        // блок скрывается, если кнопка выделена (markedBtnFlag == true); отображается, если нет
+        // и если информационный блок не скрыт вообще
         if (markedBtnFlag) {
             helpBlock.classList.add("hidden-help-block");
-        } else {
+        } else if (!helpBlock.classList.contains("closed-flag")) {
             helpBlock.classList.remove("hidden-help-block");
         }
     }
