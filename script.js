@@ -83,6 +83,7 @@ function showAll() {
         } 
         
         if ("param" in dataAttr || "info" in dataAttr) {
+            hideShowHelpBlock();
             hidePrevious(dataAttr);
             highlightInfoBlock(dataAttr); // выделить блок с информацией
         } 
@@ -96,6 +97,7 @@ function showAll() {
         let btnsForCenterBlock = getBtnsForCenterBlock();
         //console.log(btnsForCenterBlock);
         let markedBtnFlag = isMarked(btnsForCenterBlock);
+        //console.log(markedBtnFlag);
 
         // блок скрывается, если кнопка выделена (markedBtnFlag == true); отображается, если нет
         // и если информационный блок не скрыт вообще
