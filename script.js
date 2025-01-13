@@ -289,9 +289,7 @@ function showAll() {
         } else {
             selectedParamBlock.classList.add("selected-param-block");
         }
-    }
-
-    
+    }  
 
     // * Динамический вывод информации на страницу
 
@@ -403,9 +401,30 @@ function showAll() {
         return iconBlock;
     }
 
+    // *  Отображение дополнительной информации в блоках параметров при клике на "i"
+    let infoIcons = document.querySelectorAll(".info-icon-block");
+    //console.log(infoIcons);
+
+    infoIcons.forEach( (icon) => icon.addEventListener("click", function() {
+        let dataAttrValue = icon.parentElement.dataset.param;
+        showMoreInfo(dataAttrValue);
+    }));
+
+    function showMoreInfo(dataAttrValue) {
+        //console.log(dataAttrValue);
+
+        let moreInfoBlock = document.querySelector(`.param-block[data-param="${dataAttrValue}"] .more-info`);
+        //console.log(moreInfoBlock);
+
+        if (moreInfoBlock.classList.contains("shown-more-info")) {
+            moreInfoBlock.classList.remove("shown-more-info");
+        } else {
+            moreInfoBlock.classList.add("shown-more-info");
+        }
+    }
 
 
-
+    
 
     // * Запрет перетаскивания изображений
     let allImg = document.querySelectorAll("img");
@@ -444,7 +463,7 @@ let centerScreenParams = {
                     { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
                 ]
         },
-        { tag: 'p', class: 'more-info', text: '' },
+        { tag: 'p', class: 'more-info', text: '...' }, // !
     ],
 };
 
