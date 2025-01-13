@@ -256,12 +256,15 @@ img {
     border-radius: 3px;
     background-color: white;
     width: 45%;
+    /*display: none;*/
 }
 
 .part-info p {
     margin: 0;
     color: rgb(26, 27, 30);
 }
+
+/* Информационный блок-сообщение*/
 
 .info-block {
     box-sizing: border-box;
@@ -338,7 +341,8 @@ img {
 /* Блок параметров */
 
 .parameters p {
-    margin-top: 0;
+    /*margin-top: 0;*/
+    margin-top: 8px;
     margin-bottom: 4px;
 }
 
@@ -353,6 +357,10 @@ img {
 
 .more-info {
     display: none;
+}
+
+.param-block .shown-more-info {
+    display: block;
 }
 
 .info-icon-block {
