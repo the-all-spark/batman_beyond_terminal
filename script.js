@@ -53,6 +53,8 @@ function showAll() {
     function showHideRightPhoto(dataAttr) {
         let photo = document.querySelector(".terry-photo");
 
+        // TODO let windowWidth = getWindowWidth();
+
         if (Object.keys(dataAttr)[0] === 'part' && window.innerWidth <= 1260) {
             photo.style.display = "none";
         } else {
@@ -65,6 +67,9 @@ function showAll() {
             photo.style.display = "block";
         }
     }
+
+   
+
 
     // функция выбора действия в зависимости от атрибута data
     function chooseAction(dataAttr) {
@@ -401,19 +406,21 @@ function showAll() {
         return iconBlock;
     }
 
-    // *  Отображение дополнительной информации в блоках параметров при клике на "i"
+    // *  Отображение дополнительной информации в блоках параметров и информации при клике на "i"
     let infoIcons = document.querySelectorAll(".info-icon-block");
     //console.log(infoIcons);
 
     infoIcons.forEach( (icon) => icon.addEventListener("click", function() {
-        let dataAttrValue = icon.parentElement.dataset.param;
-        showMoreInfo(dataAttrValue);
+        let dataAttr = icon.parentElement.dataset;
+        showMoreInfo(dataAttr);
     }));
 
-    function showMoreInfo(dataAttrValue) {
-        //console.log(dataAttrValue);
+    function showMoreInfo(dataAttr) {
+        //console.log(dataAttr);
+        let attr = Object.keys(dataAttr)[0];
+        let value = Object.values(dataAttr)[0];
 
-        let moreInfoBlock = document.querySelector(`.param-block[data-param="${dataAttrValue}"] .more-info`);
+        let moreInfoBlock = document.querySelector(`.param-block[data-${attr}="${value}"] .more-info`);
         //console.log(moreInfoBlock);
 
         if (moreInfoBlock.classList.contains("shown-more-info")) {
