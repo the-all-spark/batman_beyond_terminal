@@ -355,6 +355,10 @@ img {
     position: relative;
 }
 
+.param-block[data-param] h3 {
+    width: 85%;
+}
+
 .more-info {
     display: none;
 }

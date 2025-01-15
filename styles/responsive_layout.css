@@ -30,6 +30,12 @@
 
     .shown-part-photo {
         position: absolute;
+        margin-top: 8px;
+    }
+
+    button[data-info="bruce-wayne"] {
+        line-height: 0.8;
+        font-size: 13px;
     }
 
 
@@ -47,6 +53,15 @@
         width: 10.8%;
     }
 
+    .help-block {
+        grid-template-areas: "text"
+                            "ok-button";
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        column-gap: 0;
+        row-gap: 10px;
+    }
+
 }
 
 @media screen and (max-width: 1140px) {
@@ -55,6 +70,12 @@
     }
     button {
         font-size: 13px;
+    }
+
+    /*! */
+    .clock {
+        width: 110px;
+        height: 110px;
     }
 
 }
@@ -66,6 +87,15 @@
 
     button {
         padding: 1px 3px;
+    }
+
+    .help-block {
+        padding: 10px 8px;
+        position: absolute;
+        width: 200px;
+        left: -30px;
+        bottom: 50px;
+        border: 1px solid grey;
     }
 
 
@@ -88,6 +118,21 @@
     .keyboard {
         padding: 5px;
     }
+
+    .help-block {
+        width: 170px;
+    }
+
+    .param-block[data-param] h3 {
+        width: 75%;
+    }
+    
+    /*! */
+    .clock {
+        width: 100px;
+        height: 100px;
+    }
+
    
 }
 
@@ -101,6 +146,16 @@
         bottom: 10px;
         top: 8px;
         padding: 20px;
+    }
+
+    .help-block {
+        left: -50px;
+        border: 1px solid grey;
+    }
+
+    h3 {
+        font-size: 13px;
+        line-height: 1.35;
     }
 
 }
@@ -119,6 +174,13 @@
     button {
         width: 90px;
     }
+
+    /*! */
+    .clock {
+        width: 90px;
+        height: 90px;
+    }
+
 
 }
 
@@ -142,6 +204,12 @@
 
     .part-photo-horizontal {
         width: 26vh;
+    }
+
+    /*! */
+    .clock {
+        width: 80px;
+        height: 80px;
     }
 
 
