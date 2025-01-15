@@ -1,7 +1,14 @@
 window.addEventListener("load", showAll);
 
 function showAll() {
-    //console.log(window.innerWidth);
+    
+    // Получение ширины экрана при открытии страницы и при увеличении/уменьшении экрана
+    let windowWidth = window.innerWidth;
+    console.log(windowWidth);
+
+    window.addEventListener("resize", function() {
+        windowWidth = window.innerWidth;
+    });
 
     // Скрытие информационного блока при клике на кнопку "ОК"
     let helpBlockBtn = document.querySelector(".help-block button");
@@ -53,9 +60,7 @@ function showAll() {
     function showHideRightPhoto(dataAttr) {
         let photo = document.querySelector(".terry-photo");
 
-        // TODO let windowWidth = getWindowWidth();
-
-        if (Object.keys(dataAttr)[0] === 'part' && window.innerWidth <= 1260) {
+        if (Object.keys(dataAttr)[0] === 'part' && windowWidth <= 1260) {
             photo.style.display = "none";
         } else {
             photo.style.display = "block";
