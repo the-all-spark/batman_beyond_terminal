@@ -301,7 +301,7 @@ function showAll() {
         }
     }  
 
-    // * Динамический вывод информации на страницу
+    // ** Динамический вывод информации на страницу
 
     let mainInfo = constructInfoBlock(rightScreenInfo.mainInfoRU);
     let intelligenceParam = constructInfoBlock(centerScreenParams.intelligenceRU);
@@ -329,6 +329,18 @@ function showAll() {
                 // * Построение полосы характеристики
                 let rectanglesArray = getRectanglesArr(infoBlock[i].text); // получаем в виде массива
                 rectanglesArray.forEach((rectangle) => elem.append(rectangle)); // добавляем на страницу элементы массива
+            
+            } else if (Array.isArray(infoBlock[i].text)) {
+                // если текст - массив со вложенными тегами для выделения текста
+
+                let decorTag = document.createElement(`${infoBlock[i].text[0].decorTag}`);
+                decorTag.prepend(infoBlock[i].text[1].decorText);
+                elem.append(decorTag, ': ');
+
+                if (infoBlock[i].text[2].text !== '') {
+                    elem.append(infoBlock[i].text[2].text);
+                }
+        
             } else {
                 elem.innerHTML = `${infoBlock[i].text}`;
             }
@@ -456,10 +468,10 @@ let centerScreenParams = {
         { dataAttr: 'param', value: 'intelligence' },
         { tag: 'h3', class: null, text: 'Интеллект' },
         { tag: 'div', class: 'param', text:
-                [
-                    { tag: 'div', class: 'filled-rectangle param-rectangle', param: 7 },
-                    { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
-                ]
+            [
+                { tag: 'div', class: 'filled-rectangle param-rectangle', param: 7 },
+                { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
+            ]
         },
         {
             tag: 'p', class: 'more-info', text: `Способен мыслить нестандартно, хорошо разбирается в технике, 
@@ -470,10 +482,10 @@ let centerScreenParams = {
         { dataAttr: 'param', value: 'strength' },
         { tag: 'h3', class: null, text: 'Сила|Выносливость' },
         { tag: 'div', class: 'param', text:
-                [
-                    { tag: 'div', class: 'filled-rectangle param-rectangle', param: 9 },
-                    { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
-                ]
+            [
+                { tag: 'div', class: 'filled-rectangle param-rectangle', param: 9 },
+                { tag: 'div', class: 'empty-rectangle param-rectangle', param: null }
+            ]
         },
         { tag: 'p', class: 'more-info', text: '...' }, // !
     ],
@@ -487,17 +499,17 @@ let centerScreenInfo = {
         { tag: 'p', class: null, text: '<b>Высокотехнологичный костюм</b>' },
         { tag: 'ul', class: null, text: 
             [ 
-                { number: 1, text: `состоит из очень лёгкого и гибкого материала, что позволяет носить его в рюкзаке в
+                { item: 1, text: `состоит из очень лёгкого и гибкого материала, что позволяет носить его в рюкзаке в
                     сложенном виде;` },
-                { number: 2, text: `автоматически меняет размер в зависимости от физических параметров человека, который
+                { item: 2, text: `автоматически меняет размер в зависимости от физических параметров человека, который
                     его носит;` },
-                { number: 3, text: `обладает высокой прочностью и усиленной баллистической защитой (защищает от падений
+                { item: 3, text: `обладает высокой прочностью и усиленной баллистической защитой (защищает от падений
                     с большой высоты, пробития стен, мощных взрывов, метательных ножей);` },
-                { number: 4, text: `защищает от экстремально высоких и низких температур, разрядов тока, воздействия
+                { item: 4, text: `защищает от экстремально высоких и низких температур, разрядов тока, воздействия
                     воды и низких уровней радиации;` },
-                { number: 5, text: `имеет встроенный жучок, позволяющий в любой момент определить его местонахождение;` },
-                { number: 6, text: `позволяет увеличить температуру отдельных частей до четырёх тысяч градусов;` },
-                { number: 7, text: `обладает «противоугонной» системой, управляемой из бэт-пещеры (при активации все
+                { item: 5, text: `имеет встроенный жучок, позволяющий в любой момент определить его местонахождение;` },
+                { item: 6, text: `позволяет увеличить температуру отдельных частей до четырёх тысяч градусов;` },
+                { item: 7, text: `обладает «противоугонной» системой, управляемой из бэт-пещеры (при активации все
                     функции костюма, кроме радиопередатчика, полностью отключаются, а сам он застывает в
                     одном положении вместе с тем, кто его носит, до отключения режима).` },
             ]
@@ -513,14 +525,14 @@ let rightScreenInfo = {
     mainInfoRU: [
         { language: "RU", blockTag: 'div', blockClass: 'param-block' },
         { dataAttr: 'info', value: 'main-info' },
-        { tag: 'p', class: null, text: '<ins>Имя</ins>:' },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Имя'}, {text: ''} ] },
         { tag: 'h3', class: 'name', text: 'Терренс "Терри" МакГиннис' },
-        { tag: 'p', class: null, text: '<ins>Пол</ins>: Мужской' },
-        { tag: 'p', class: null, text: '<ins>Возраст</ins>: 17 лет' },
-        { tag: 'p', class: null, text: '<ins>Рост</ins>: 1,78 м' },
-        { tag: 'p', class: null, text: '<ins>Вес</ins>: 77 кг' },
-        { tag: 'p', class: null, text: '<ins>Глаза</ins>: голубые' },
-        { tag: 'p', class: null, text: '<ins>Волосы</ins>: чёрные' },
-        { tag: 'p', class: null, text: '<ins>Статус личности</ins>: cкрыта' },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Пол'}, {text: 'мужской'} ] },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Возраст'}, {text: '17 лет'} ] },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Рост'}, {text: '1,78 м'} ] },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Вес'}, {text: '77 кг'} ] },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Глаза'}, {text: 'голубые'} ] },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Волосы'}, {text: 'чёрные'} ] },
+        { tag: 'p', class: null, text: [ {decorTag: 'ins'}, {decorText: 'Статус личности'}, {text: 'cкрыта'} ] },
     ],
 };
