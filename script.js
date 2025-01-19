@@ -160,20 +160,21 @@ function showAll() {
 
         //if (pushedButton.classList.contains("pushed-btn") && ( shownCostumeInfo == null || shownPartInfo == null)) {
         if (pushedButton.classList.contains("pushed-btn")) {
-            let costumeInfo = constructCostumeInfo(value);
-            console.log(costumeInfo);
+            let costumeInfoArr = constructCostumeInfo(value);
+            console.log(costumeInfoArr);
 
             // ! пока еще есть части костюма без инфы в массиве
-            if (costumeInfo !== undefined) {
-                if (attr == 'part') {
-                    costumeInfo.classList.add("shown-part");
-                    document.querySelector(".info").append(costumeInfo);
-                } else {
-                    costumeInfo.classList.add("shown-info-block");
-                    document.querySelector(".info").before(costumeInfo);
-                }
+            if (costumeInfoArr !== undefined) {
+                costumeInfoArr.forEach( (part) => {
+                    if (attr == 'part') {
+                        part.classList.add("shown-part");
+                        document.querySelector(".info").append(part);
+                    } else {
+                        part.classList.add("shown-info-block");
+                        document.querySelector(".info").before(part);
+                    }
+                });
             }
-
         } else {
             let previousCostumeInfo = document.querySelectorAll(".shown-info-block"); 
             previousCostumeInfo.forEach( (info) => info.remove() ); 
@@ -194,39 +195,51 @@ function showAll() {
     }
 
     // * Функция построения блока с общей информацией о костюме и частям костюма
+    // включает наличие нескольких блоков с одинаковым dataAttr=value
     function constructCostumeInfo(dataAttrValue) {
         console.log(dataAttrValue);
         console.log(centerScreenInfo);
 
-        let selectedArr = centerScreenInfo[`${dataAttrValue}`];
-        console.log(selectedArr);
+        let selectedSet = []; // массив (набор) блоков информации для вывода
+        for (let key in centerScreenInfo) {
+            if (centerScreenInfo[key][1].value == dataAttrValue) {
+                let selectedElem = centerScreenInfo[key];
+                selectedSet.push(selectedElem);
+            }
+        }
+        //console.log(selectedSet);
 
         // ! пока есть части костюма без заполненной информации (объектов в массиве)
-        if (selectedArr !== undefined) {
-            let divBlock = document.createElement(`${selectedArr[0].blockTag}`);
-            divBlock.className = `${selectedArr[0].blockClass}`;
-            divBlock.setAttribute(`data-${selectedArr[1].dataAttr}`, `${selectedArr[1].value}`);
+        if (selectedSet.length > 0) {
+            let blocksToShow = []; // массив блоков для вывода на страницу
 
-            for (let i = 2; i < selectedArr.length; i++) {
-                let elem = document.createElement(`${selectedArr[i].tag}`);
+            selectedSet.forEach((part) => {
+                let divBlock = document.createElement(`${part[0].blockTag}`);
+                divBlock.className = `${part[0].blockClass}`;
+                divBlock.setAttribute(`data-${part[1].dataAttr}`, `${part[1].value}`);
 
-                if (selectedArr[i].class !== null) {
-                    elem.className = `${selectedArr[i].class}`;
+                for (let i = 2; i < part.length; i++) {
+                    let elem = document.createElement(`${part[i].tag}`);
+
+                    if (part[i].class !== null) {
+                        elem.className = `${part[i].class}`;
+                    }
+
+                    if (part[i].tag === 'ul') {
+                        let itemListArray = constructItemListArr(part[i].text);
+                        itemListArray.forEach( (item) => elem.append(item) ); 
+                    } else {
+                        elem.innerHTML = `${part[i].text}`;
+                    }
+
+                    divBlock.append(elem);
                 }
+                blocksToShow.push(divBlock);
+            });
 
-                if (selectedArr[i].tag === 'ul') {
-                    let itemListArray = constructItemListArr(selectedArr[i].text);
-                    itemListArray.forEach( (item) => elem.append(item) ); 
-                    
-                } else {
-                    elem.innerHTML = `${selectedArr[i].text}`;
-                }
-
-                divBlock.append(elem);
-            }
-            return divBlock;
+            //console.log(blocksToShow);
+            return blocksToShow;
         }
-
     }
 
     // функция построения списка 
@@ -564,13 +577,31 @@ let centerScreenInfo = {
         },
     ],
 
-    'mask': [
+    'mask-eyes': [
         { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
         { dataAttr: 'part', value: 'mask' },
-        { tag: 'p', class: null, text: '<b>Маска</b>' },
+        { tag: 'p', class: null, text: '<b>Линзы в маске</b>' },
         { tag: 'ul', class: null, text: 
             [ 
-                { item: 1, text: `ТУТ ДОЛЖЕН БЫТЬ ДРУГОЙ ТЕКСТ` },
+                { item: 1, text: `передают изображение с костюма на монитор бэт-компьютера в пещере;` },
+                { item: 2, text: `выводят всю необходимую информацию на внутренний дисплей маски 
+                    (в том числе полученную с бэт-компьютера);` },
+                { item: 3, text: `позволяют переключаться между режимами (ночным, инфракрасным и ультрафиолетовым);` },
+                { item: 4, text: `служат цифровым биноклем (телескопическое зрение, позволяющее увеличивать кратность 
+                    изображения, чтобы видеть на дальние расстояния или разглядеть мелкие объекты вблизи; 
+                    интерфейс и система наведения показывают расстояние до выбранной цели и её скорость передвижения);` },
+                { item: 5, text: `содержат анализатор ДНК.` },
+            ]
+        },
+    ],
+
+    'mask-ears': [
+        { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
+        { dataAttr: 'part', value: 'mask' },
+        { tag: 'p', class: null, text: '<b>Острые уши</b>' },
+        { tag: 'ul', class: null, text: 
+            [ 
+                { item: 1, text: `текст по ушкам` },
             ]
         },
     ],
