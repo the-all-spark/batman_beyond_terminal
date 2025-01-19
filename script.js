@@ -23,8 +23,12 @@ function showAll() {
 
     // * Выбор действия при клике на кнопку "клавиатуры", эффект нажатой кнопки
     keyboardButtons.forEach((button) => button.addEventListener("click", function () {
+        //console.log(this.dataset);
+
         markBtnAsPushed(this.dataset);
         showHideRightPhoto(this.dataset);
+        hideShowHelpBlock(); // скрыть инфо-блок
+        hidePrevious(this.dataset); // скрыть предыдущие выделения
         chooseAction(this.dataset);
     }));
 
@@ -81,20 +85,15 @@ function showAll() {
         //console.log(dataAttr);
 
         if ("costume" in dataAttr) {
-            hideShowHelpBlock();
-            showCostumeInfo(dataAttr.costume);
-            hidePrevious(dataAttr); // скрыть предыдущие выделения
+            showCostumeInfo(dataAttr); // отображение информации
         } 
 
         if ("part" in dataAttr) {
-            hideShowHelpBlock();
-            showCostumePart(dataAttr);
-            hidePrevious(dataAttr); // скрыть предыдущие выделения
+            showCostumePart(dataAttr) // отображение рамки и увеличенного фрагмента
+            showCostumeInfo(dataAttr); // отображение информации
         } 
         
         if ("param" in dataAttr || "info" in dataAttr) {
-            hideShowHelpBlock();
-            hidePrevious(dataAttr);
             highlightInfoBlock(dataAttr); // выделить блок с информацией
         } 
 
@@ -143,6 +142,47 @@ function showAll() {
         } 
     }
 
+    // !
+    // * функция отображения блока с информацией и частями костюма при клике на кнопку клавиатуры
+    function showCostumeInfo(dataAttr) {
+        //console.log(dataAttr);
+        let attr = Object.keys(dataAttr)[0];
+        let value = Object.values(dataAttr)[0];
+        //console.log(attr);
+        //console.log(value);
+
+        let pushedButton = document.querySelector(`button[data-${attr}="${value}"]`);
+        //let shownCostumeInfo = document.querySelector(`.shown-info-block[data-${attr}="${value}"]`);
+        //let shownPartInfo = document.querySelector(`.shown-part[data-${attr}="${value}"]`);
+        //console.log(pushedButton);
+        //console.log(shownCostumeInfo); // ! м.б. null
+        //console.log(shownPartInfo); // ! м.б. null
+
+        //if (pushedButton.classList.contains("pushed-btn") && ( shownCostumeInfo == null || shownPartInfo == null)) {
+        if (pushedButton.classList.contains("pushed-btn")) {
+            let costumeInfo = constructCostumeInfo(value);
+            console.log(costumeInfo);
+
+            // ! пока еще есть части костюма без инфы в массиве
+            if (costumeInfo !== undefined) {
+                if (attr == 'part') {
+                    costumeInfo.classList.add("shown-part");
+                    document.querySelector(".info").append(costumeInfo);
+                } else {
+                    costumeInfo.classList.add("shown-info-block");
+                    document.querySelector(".info").before(costumeInfo);
+                }
+            }
+
+        } else {
+            let previousCostumeInfo = document.querySelectorAll(".shown-info-block"); 
+            previousCostumeInfo.forEach( (info) => info.remove() ); 
+
+            let previousPartInfo = document.querySelectorAll(".shown-part"); 
+            previousPartInfo.forEach( (info) => info.remove() ); 
+        }
+    }
+
     // * Выделение части костюма рамкой и отображение увеличенного фрагмента при клике на кнопку
     function showCostumePart(dataAttr) {
         let costumePart = dataAttr.part;
@@ -153,52 +193,40 @@ function showAll() {
         }
     }
 
-    // * функция отображения блока с информацией при клике на кнопку клавиатуры
-    function showCostumeInfo(costume) {
-        let pushedButton = document.querySelector(`button[data-costume="${costume}"]`);
-        let shownCostumeInfo = document.querySelector(`.shown-info-block[data-costume="${costume}"]`);
-        //console.log(pushedButton);
-        //console.log(shownCostumeInfo);
+    // * Функция построения блока с общей информацией о костюме и частям костюма
+    function constructCostumeInfo(dataAttrValue) {
+        console.log(dataAttrValue);
+        console.log(centerScreenInfo);
 
-        if (pushedButton.classList.contains("pushed-btn") && shownCostumeInfo == null) {
-            let costumeInfo = constructCostumeInfo(costume);
-            document.querySelector(".info").before(costumeInfo);
-        } else {
-            let previousCostumeInfo = document.querySelectorAll(".shown-info-block");
-            previousCostumeInfo.forEach( (info) => info.remove() );
-        }
-    }
+        let selectedArr = centerScreenInfo[`${dataAttrValue}`];
+        console.log(selectedArr);
 
-    // * Функция построения блока с общей информацией о костюме 
-    // ! пока только для общей инф-ции по всему костюму
-    function constructCostumeInfo(costume) {
-        console.log(costume);
-        console.log(centerScreenInfo.costumeInfo);
+        // ! пока есть части костюма без заполненной информации (объектов в массиве)
+        if (selectedArr !== undefined) {
+            let divBlock = document.createElement(`${selectedArr[0].blockTag}`);
+            divBlock.className = `${selectedArr[0].blockClass}`;
+            divBlock.setAttribute(`data-${selectedArr[1].dataAttr}`, `${selectedArr[1].value}`);
 
-        let divBlock = document.createElement(`${centerScreenInfo.costumeInfo[0].blockTag}`);
-        divBlock.className = `${centerScreenInfo.costumeInfo[0].blockClass}`;
-        divBlock.setAttribute(`data-${centerScreenInfo.costumeInfo[1].dataAttr}`, `${centerScreenInfo.costumeInfo[1].value}`);
+            for (let i = 2; i < selectedArr.length; i++) {
+                let elem = document.createElement(`${selectedArr[i].tag}`);
 
-        for (let i = 2; i < centerScreenInfo.costumeInfo.length; i++) {
-            let elem = document.createElement(`${centerScreenInfo.costumeInfo[i].tag}`);
+                if (selectedArr[i].class !== null) {
+                    elem.className = `${selectedArr[i].class}`;
+                }
 
-            if (centerScreenInfo.costumeInfo[i].class !== null) {
-                elem.className = `${centerScreenInfo.costumeInfo[i].class}`;
+                if (selectedArr[i].tag === 'ul') {
+                    let itemListArray = constructItemListArr(selectedArr[i].text);
+                    itemListArray.forEach( (item) => elem.append(item) ); 
+                    
+                } else {
+                    elem.innerHTML = `${selectedArr[i].text}`;
+                }
+
+                divBlock.append(elem);
             }
-
-            if (centerScreenInfo.costumeInfo[i].tag === 'ul') {
-                let itemListArray = constructItemListArr(centerScreenInfo.costumeInfo[i].text);
-                itemListArray.forEach( (item) => elem.append(item) ); 
-                
-            } else {
-                elem.innerHTML = `${centerScreenInfo.costumeInfo[i].text}`;
-            }
-
-            divBlock.append(elem);
+            return divBlock;
         }
 
-        divBlock.classList.add("shown-info-block");
-        return divBlock;
     }
 
     // функция построения списка 
@@ -251,6 +279,14 @@ function showAll() {
             }
         });
 
+        // информация о частях костюма
+        let previousPartInfo = document.querySelectorAll(".shown-part");
+        previousPartInfo.forEach( (info) => {
+            if (info.dataset.part !== dataAttrValue) {
+                info.remove();
+            }
+        });
+
     }
 
     // функция отображения рамки при клике на часть костюма
@@ -277,7 +313,8 @@ function showAll() {
         }
     }
 
-    // * Открытие увеличенного изображения при клике на рамку фрагмента костюма на фото
+    // TODO
+    // * Открытие увеличенного изображения при клике на рамку фрагмента костюма на фото 
     let costumePartsAll = document.querySelectorAll(".part-frame");
 
     costumePartsAll.forEach((part) => part.addEventListener("click", function () {
@@ -493,7 +530,7 @@ let centerScreenParams = {
 
 // Выноски и информация о костюме
 let centerScreenInfo = {
-    costumeInfo: [
+    'costume-info': [
         { language: "RU", blockTag: 'div', blockClass: 'costume-info-block info-block' }, 
         { dataAttr: 'costume', value: 'costume-info' },
         { tag: 'p', class: null, text: '<b>Высокотехнологичный костюм</b>' },
@@ -516,7 +553,29 @@ let centerScreenInfo = {
         },
     ],
 
-    // ! остальные выноски
+    'chest': [
+        { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
+        { dataAttr: 'part', value: 'chest' },
+        { tag: 'p', class: null, text: '<b>Торс</b>' },
+        { tag: 'ul', class: null, text: 
+            [ 
+                { item: 1, text: `Включает приспособление, способное временно ослепить противников магниевой вспышкой;` },
+            ]
+        },
+    ],
+
+    'mask': [
+        { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
+        { dataAttr: 'part', value: 'mask' },
+        { tag: 'p', class: null, text: '<b>Маска</b>' },
+        { tag: 'ul', class: null, text: 
+            [ 
+                { item: 1, text: `ТУТ ДОЛЖЕН БЫТЬ ДРУГОЙ ТЕКСТ` },
+            ]
+        },
+    ],
+
+    
 
 };
 
