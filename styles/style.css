@@ -33,6 +33,13 @@ p {
     font-size: 13px;
 }
 
+ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    list-style-type: circle;
+}
+
 li {
     margin: 0;
     color: rgb(26, 27, 30);
@@ -180,9 +187,10 @@ img {
     align-self: flex-start;
     justify-self: flex-start;
     position: relative;
-    display: grid;
-    height: 95%;
+    /*display: grid;
+    height: 95%;*/
     padding-top: 10px;
+    width: 100%;
 }
 
 .main-photo {
@@ -252,11 +260,13 @@ img {
 /* ! Сноски с информацией по частям костюма */
 .part-info {
     box-sizing: border-box;
-    padding: 7px;
+    padding: 10px;
     border-radius: 3px;
     background-color: white;
-    width: 45%;
-    /*display: none;*/
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    display: block;
 }
 
 .part-info p {
@@ -287,13 +297,6 @@ img {
     padding-left: 5px;
 }
 
-.info-block ul {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    list-style-type: circle;
-}
-
 .info-block.shown-info-block {
     display: block;
 }
@@ -320,6 +323,7 @@ img {
     width: 95%;
     margin: 0 auto;
     box-sizing: border-box;
+    margin-top: calc(50%); /* выравнивание по центру по верт. */
 }
 
 .help-block p {
