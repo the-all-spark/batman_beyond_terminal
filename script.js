@@ -163,18 +163,29 @@ function showAll() {
             let costumeInfoArr = constructCostumeInfo(value);
             console.log(costumeInfoArr);
 
+            // TODO
+            // если в массиве costumeInfoArr > 1 элемента  - построить кнопки в блок part-buttons-block
+            // с добавлением data-buttons="mask" (и т.д.) для всего блока 
+            // и data-button="mask-eyes" (и т.д.) для каждого элемента массива (подчасти части костюма)
+            // в начало скрипта вне функции добавить обработчик для всех кнопок по клику
+
+            // если в массиве costumeInfoArr 1 элемент - отобразить его на экране
+            // part.classList.add("shown-part");
+
             // ! пока еще есть части костюма без инфы в массиве
             if (costumeInfoArr !== undefined) {
                 costumeInfoArr.forEach( (part) => {
                     if (attr == 'part') {
-                        part.classList.add("shown-part");
-                        document.querySelector(".info").append(part);
+                        part.classList.add("shown-part"); // TODO добавлять при клике на кнопку части
+                        //document.querySelector(".info").append(part);
+                        document.querySelector(".part-info-block").append(part);
                     } else {
                         part.classList.add("shown-info-block");
                         document.querySelector(".info").before(part);
                     }
                 });
             }
+
         } else {
             let previousCostumeInfo = document.querySelectorAll(".shown-info-block"); 
             previousCostumeInfo.forEach( (info) => info.remove() ); 
@@ -316,7 +327,7 @@ function showAll() {
 
     // функция отображения увеличенного изображения части костюма
     function showZoomedImage(part) {
-        let selectedCostumePart = document.querySelector(`.info img[data-part="${part}"]`);
+        let selectedCostumePart = document.querySelector(`.part-photo-block img[data-part="${part}"]`);
 
         //selectedCostumePart.classList.toggle("shown-part-photo");
         if (selectedCostumePart.classList.contains("shown-part-photo")) {
@@ -579,7 +590,7 @@ let centerScreenInfo = {
 
     'mask-eyes': [
         { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
-        { dataAttr: 'part', value: 'mask' },
+        { dataAttr: 'part', value: 'mask' }, // TODO dataAttrAdd: 'button', valueAdd: 'mask-eyes'
         { tag: 'p', class: null, text: '<b>Линзы в маске</b>' },
         { tag: 'ul', class: null, text: 
             [ 
@@ -599,12 +610,29 @@ let centerScreenInfo = {
         { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
         { dataAttr: 'part', value: 'mask' },
         { tag: 'p', class: null, text: '<b>Острые уши</b>' },
+        { tag: 'p', class: null, text: 'Встроенная система связи (передатчик):' },
         { tag: 'ul', class: null, text: 
             [ 
-                { item: 1, text: `текст по ушкам` },
+                { item: 1, text: `позволяет держать постоянную связь с бэт-пещерой;` },
+                { item: 2, text: `перенаправляет все телефонные звонки на гарнитуру костюма, 
+                    позволяя не отвлекаться во время выполнения заданий.` },
             ]
         },
     ],
+
+    'mask-mouth-nose': [
+        { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
+        { dataAttr: 'part', value: 'mask' },
+        { tag: 'p', class: null, text: '<b>Нос и рот</b>' },
+        { tag: 'p', class: null, text: 'Дыхательный аппарат - своеобразная маска, делающая костюм полностью герметичным:' },
+        { tag: 'ul', class: null, text: 
+            [ 
+                { item: 1, text: `позволяет долгое время дышать под водой;` },
+                { item: 2, text: `защищает от ядовитых газов.` },
+            ]
+        },
+    ],
+
 
     
 
