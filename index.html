@@ -37,14 +37,9 @@
                         <div class="bb-arm-area part-frame" data-part="arm"></div>
 
 
-
-
-
-
                     </div>
 
                     <div class="info">
-
                         <div class="help-block">
                             <p>Чтобы отобразить информацию на экране, 
                             выберите соответствующий пункт на "клавиатуре" внизу</p>
@@ -52,28 +47,27 @@
                         </div>
 
                         <!-- ! Увеличенные элементы частей костюма -->
-                        <img class="bb-mask part-photo-vertical" src="./assets/bb_mask.jpg" data-part="mask" alt="Mask">
-                        <img class="bb-belt part-photo-horizontal" src="./assets/bb_belt.jpg" data-part="belt" alt="Belt">
-                        <img class="bb-chest part-photo-horizontal" src="./assets/bb_chest.jpg" data-part="chest" alt="Chest">
-                        <img class="bb-arm part-photo-horizontal" src="" data-part="arm" alt="Arm">
-
-
-
-
-
-                        <!-- ! Выноски информации о частях костюма -->
-                        <div class="part-info" style="display:none"> <!-- ! -->
-                            <p > 
-                                <b>Линзы в маске костюма</b>: <br> выводят всю нужную информацию,
-                                позволяют переключаться между режимами (ночным,
-                                инфракрасным и ультрафиолетовым зрениями)
-                            </p>
-                        </div>
-
-
-
+                        <div class="part-photo-block">
+                            <img class="bb-mask part-photo-vertical" src="./assets/bb_mask.jpg" data-part="mask" alt="Mask">
+                            <img class="bb-belt part-photo-horizontal" src="./assets/bb_belt.jpg" data-part="belt" alt="Belt">
+                            <img class="bb-chest part-photo-horizontal" src="./assets/bb_chest.jpg" data-part="chest" alt="Chest">
+                            <img class="bb-arm part-photo-horizontal" src="" data-part="arm" alt="Arm">
                         
-
+                        
+                        
+                        </div>
+                        
+                        <!-- ! Кнопки для частей костюма, если блоков больше 1го -->
+                        <!-- TODO через  JS -->
+                        <!-- TODO добавить нов. атрибут в объект или вывести data=value из того что есть ? -->
+                        <div class="part-buttons-block" data-buttons="mask"> 
+                            <button class="part-info-button" data-button="mask-eyes">Линзы в маске</button> <!-- TODO -->
+                            <button class="part-info-button">Острые уши</button>
+                            <button class="part-info-button">Рот и нос</button>
+                        </div>
+                        
+                        <!--  ! Блоки информации по костюму, выведенные через JS -->
+                        <div class="part-info-block"></div>
                     </div>
 
                     <img class="terry-photo main-photo" src="./assets/terry_mcginnis.jpg" alt="Terry McGinnis">

@@ -176,6 +176,10 @@ img {
     border-radius: 3px;
 }
 
+.main-photo {
+    height: 67vh;
+}
+
 .batman-photo-block {
     grid-area: batman;
     position: relative;
@@ -186,19 +190,36 @@ img {
     /*float: right;*/
 }
 
+/* Общий информационный блок */
+
 .info {
     grid-area: info;
     align-self: flex-start;
     justify-self: flex-start;
     position: relative;
-    /*display: grid;
-    height: 95%;*/
     padding-top: 10px;
     width: 100%;
+    display: grid;
+    /*height: 95%;*/
+    grid-template-areas: 
+        "part-photo part-buttons"
+        "part-info part-info";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    column-gap: 15px;
 }
 
-.main-photo {
-    height: 67vh;
+.part-photo-block {
+    grid-area: part-photo;
+}
+
+.part-buttons-block {
+    grid-area: part-buttons;
+    display: none; /* ! */
+}
+
+.part-info-block {
+    grid-area: part-info;
 }
 
 .part-photo-vertical {
@@ -270,6 +291,7 @@ img {
     width: 100%;
     height: auto;
     margin-top: 10px;
+    /*display: none;*/ /* ! !!!!! */
     display: block;
 }
 
@@ -278,7 +300,30 @@ img {
     color: rgb(26, 27, 30);
 }
 
-/* Информационный блок-сообщение*/
+.shown-part {
+    display: block;
+}
+
+/* Кнопки по частям костюма */
+
+.part-buttons-block button {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid rgb(26, 27, 30);
+    padding: 0 5px;
+    background: white; /* ! подкорректировать эффект при наведении*/
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.part-buttons-block button:hover {
+    cursor: pointer;
+    background: radial-gradient(rgb(255 255 255), rgb(255 255 255), rgb(210 222 223), rgb(136 136 137));
+}
+
+/* Информационный блок по костюму*/
 
 .info-block {
     box-sizing: border-box;
@@ -311,7 +356,7 @@ img {
         color: aqua;
     }*/
 
-/* Поясняющее окно */
+/* Поясняющее окно-сообщение */
 
 .help-block {
     align-self: center;
