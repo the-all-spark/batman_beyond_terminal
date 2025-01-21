@@ -167,24 +167,47 @@ function showAll() {
             // если в массиве costumeInfoArr > 1 элемента  - построить кнопки в блок part-buttons-block
             // с добавлением data-buttons="mask" (и т.д.) для всего блока 
             // и data-button="mask-eyes" (и т.д.) для каждого элемента массива (подчасти части костюма)
-            // в начало скрипта вне функции добавить обработчик для всех кнопок по клику
-
-            // если в массиве costumeInfoArr 1 элемент - отобразить его на экране
-            // part.classList.add("shown-part");
+            // ! в начало скрипта вне функции добавить обработчик для всех кнопок по клику
 
             // ! пока еще есть части костюма без инфы в массиве
             if (costumeInfoArr !== undefined) {
+
                 costumeInfoArr.forEach( (part) => {
                     if (attr == 'part') {
-                        part.classList.add("shown-part"); // TODO добавлять при клике на кнопку части
-                        //document.querySelector(".info").append(part);
-                        document.querySelector(".part-info-block").append(part);
+
+                        // если в массиве costumeInfoArr > 1 элемента - построить кнопки для частей костюма
+                        if (costumeInfoArr.length > 1) {
+                            //console.log(part);
+                            //console.log(part.dataset);
+
+                            let divButtonBlock = document.querySelector(".part-buttons-block");
+                            divButtonBlock.setAttribute("data-buttons", Object.values(part.dataset)[0]);
+
+                            let btnBlock = document.createElement("button");
+                            btnBlock.className = "part-info-button";
+                            btnBlock.setAttribute("data-button", Object.values(part.dataset)[1]);
+
+                            let btnText = part.childNodes[0].innerText;
+                            btnBlock.innerHTML = btnText;
+
+                            divButtonBlock.append(btnBlock);
+                            console.log(btnBlock);
+                        
+                            // TODO добавить нужные блоки на страницу уже с классом shown-part
+
+                        } else {
+                            // если в массиве costumeInfoArr 1 элемент - отобразить его на экране
+                            part.classList.add("shown-part"); // TODO добавлять также при клике на кнопку части
+                            document.querySelector(".part-info-block").append(part);
+                        }
+        
                     } else {
                         part.classList.add("shown-info-block");
                         document.querySelector(".info").before(part);
                     }
                 });
-            }
+
+            } 
 
         } else {
             let previousCostumeInfo = document.querySelectorAll(".shown-info-block"); 
@@ -227,7 +250,11 @@ function showAll() {
             selectedSet.forEach((part) => {
                 let divBlock = document.createElement(`${part[0].blockTag}`);
                 divBlock.className = `${part[0].blockClass}`;
+
                 divBlock.setAttribute(`data-${part[1].dataAttr}`, `${part[1].value}`);
+                if ('dataAttrAdd' in part[1]) {
+                    divBlock.setAttribute(`data-${part[1].dataAttrAdd}`, `${part[1].valueAdd}`);
+                } 
 
                 for (let i = 2; i < part.length; i++) {
                     let elem = document.createElement(`${part[i].tag}`);
@@ -310,6 +337,10 @@ function showAll() {
                 info.remove();
             }
         });
+
+        // кнопки для частей костюма (если более 1)
+        let buttonsBlock = document.querySelector(".part-buttons-block");
+        buttonsBlock.innerHTML = null;
 
     }
 
@@ -590,7 +621,8 @@ let centerScreenInfo = {
 
     'mask-eyes': [
         { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
-        { dataAttr: 'part', value: 'mask' }, // TODO dataAttrAdd: 'button', valueAdd: 'mask-eyes'
+        //{ dataAttr: 'part', value: 'mask' },
+        { dataAttr: 'part', value: 'mask', dataAttrAdd: 'button', valueAdd: 'mask-eyes'},
         { tag: 'p', class: null, text: '<b>Линзы в маске</b>' },
         { tag: 'ul', class: null, text: 
             [ 
@@ -608,7 +640,8 @@ let centerScreenInfo = {
 
     'mask-ears': [
         { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
-        { dataAttr: 'part', value: 'mask' },
+        //{ dataAttr: 'part', value: 'mask' },
+        { dataAttr: 'part', value: 'mask', dataAttrAdd: 'button', valueAdd: 'mask-ears'},
         { tag: 'p', class: null, text: '<b>Острые уши</b>' },
         { tag: 'p', class: null, text: 'Встроенная система связи (передатчик):' },
         { tag: 'ul', class: null, text: 
@@ -622,7 +655,8 @@ let centerScreenInfo = {
 
     'mask-mouth-nose': [
         { language: "RU", blockTag: 'div', blockClass: 'part-info' }, 
-        { dataAttr: 'part', value: 'mask' },
+        //{ dataAttr: 'part', value: 'mask' },
+        { dataAttr: 'part', value: 'mask', dataAttrAdd: 'button', valueAdd: 'mask-mouth-nose'},
         { tag: 'p', class: null, text: '<b>Нос и рот</b>' },
         { tag: 'p', class: null, text: 'Дыхательный аппарат - своеобразная маска, делающая костюм полностью герметичным:' },
         { tag: 'ul', class: null, text: 
