@@ -215,7 +215,7 @@ img {
 
 .part-buttons-block {
     grid-area: part-buttons;
-    display: none; /* ! */
+    /* display: none; */
 }
 
 .part-info-block {
@@ -291,8 +291,8 @@ img {
     width: 100%;
     height: auto;
     margin-top: 10px;
-    /*display: none;*/ /* ! !!!!! */
-    display: block;
+    display: none; /* ! !!!!! */
+    /*display: block; */
 }
 
 .part-info p {
