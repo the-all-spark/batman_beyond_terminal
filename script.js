@@ -36,7 +36,7 @@ function showAll() {
     function markBtnAsPushed(dataAttr) {
         let attr = Object.keys(dataAttr)[0];
         let value = Object.values(dataAttr)[0];
-        //console.log(attr);
+        console.log(attr);
         //console.log(value);
 
         let pushedButton = document.querySelector(`.keyboard button[data-${attr}="${value}"]`);
@@ -76,9 +76,6 @@ function showAll() {
             photo.style.display = "block";
         }
     }
-
-   
-
 
     // функция выбора действия в зависимости от атрибута data
     function chooseAction(dataAttr) {
@@ -142,14 +139,11 @@ function showAll() {
         } 
     }
 
-    // !
     // * функция отображения блока с информацией и частями костюма при клике на кнопку клавиатуры
     function showCostumeInfo(dataAttr) {
         //console.log(dataAttr);
         let attr = Object.keys(dataAttr)[0];
         let value = Object.values(dataAttr)[0];
-        //console.log(attr);
-        //console.log(value);
 
         let pushedButton = document.querySelector(`button[data-${attr}="${value}"]`);
         //let shownCostumeInfo = document.querySelector(`.shown-info-block[data-${attr}="${value}"]`);
@@ -163,23 +157,14 @@ function showAll() {
             let costumeInfoArr = constructCostumeInfo(value);
             console.log(costumeInfoArr);
 
-            // TODO
-            // если в массиве costumeInfoArr > 1 элемента  - построить кнопки в блок part-buttons-block
-            // с добавлением data-buttons="mask" (и т.д.) для всего блока 
-            // и data-button="mask-eyes" (и т.д.) для каждого элемента массива (подчасти части костюма)
-            // ! в начало скрипта вне функции добавить обработчик для всех кнопок по клику
-
             // ! пока еще есть части костюма без инфы в массиве
             if (costumeInfoArr !== undefined) {
 
                 costumeInfoArr.forEach( (part) => {
                     if (attr == 'part') {
 
-                        // если в массиве costumeInfoArr > 1 элемента - построить кнопки для частей костюма
+                        // если в массиве costumeInfoArr > 1 элемента - построить кнопки-меню для частей костюма
                         if (costumeInfoArr.length > 1) {
-                            //console.log(part);
-                            //console.log(part.dataset);
-
                             let divButtonBlock = document.querySelector(".part-buttons-block");
                             divButtonBlock.setAttribute("data-buttons", Object.values(part.dataset)[0]);
 
@@ -187,26 +172,44 @@ function showAll() {
                             btnBlock.className = "part-info-button";
                             btnBlock.setAttribute("data-button", Object.values(part.dataset)[1]);
 
-                            let btnText = part.childNodes[0].innerText;
+                            let btnText = part.childNodes[0].innerText; // заголовок кнопки
                             btnBlock.innerHTML = btnText;
 
                             divButtonBlock.append(btnBlock);
-                            console.log(btnBlock);
-                        
-                            // TODO добавить нужные блоки на страницу уже с классом shown-part
-
                         } else {
                             // если в массиве costumeInfoArr 1 элемент - отобразить его на экране
-                            part.classList.add("shown-part"); // TODO добавлять также при клике на кнопку части
-                            document.querySelector(".part-info-block").append(part);
+                            part.classList.add("shown-part");
                         }
-        
+                        document.querySelector(".part-info-block").append(part);
+
                     } else {
                         part.classList.add("shown-info-block");
                         document.querySelector(".info").before(part);
                     }
                 });
 
+                // * Отображение нужного блока информации по части костюма при клике на кнопку-меню
+                let partButtons = Array.from(document.querySelectorAll(".part-info-button"));
+                console.log(partButtons);
+                
+                if (partButtons.length > 0) {
+
+                    partButtons.forEach((button) => button.addEventListener("click", function () {
+                        markBtnAsPushed(this.dataset);
+                        //console.log(this.dataset);
+
+                        // скрываем показанные ранее блоки с информацией 
+                        let shownInfoBlocks = document.querySelectorAll(".shown-part");
+                        if (shownInfoBlocks.length > 0) {
+                            shownInfoBlocks.forEach((button) => button.classList.remove("shown-part"));
+                        }
+                       
+                        let  dataAttrValue = Object.values(this.dataset)[0];
+                        let selectedInfo = document.querySelector(`.part-info[data-button="${dataAttrValue}"]`);
+                        //console.log(selectedInfo);
+                        selectedInfo.classList.add("shown-part");
+                    }));
+                }
             } 
 
         } else {
