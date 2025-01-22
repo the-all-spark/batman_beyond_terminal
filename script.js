@@ -36,14 +36,24 @@ function showAll() {
     function markBtnAsPushed(dataAttr) {
         let attr = Object.keys(dataAttr)[0];
         let value = Object.values(dataAttr)[0];
-        console.log(attr);
+        //console.log(attr);
         //console.log(value);
 
-        let pushedButton = document.querySelector(`.keyboard button[data-${attr}="${value}"]`);
+        let pushedButton;
+        switch(attr) {
+            case 'part': 
+            case 'costume':
+                pushedButton = document.querySelector(`.keyboard button[data-${attr}="${value}"]`); 
+                break;
+            case 'button': 
+                pushedButton = document.querySelector(`.part-info-button[data-${attr}="${value}"]`); 
+                break;
+        }
+        //console.log(pushedButton);
 
         if (pushedButton !== null) {
             if (pushedButton.classList.contains("pushed-btn")) {
-                pushedButton.classList.remove("pushed-btn"); // отжатая кнопка
+                pushedButton.classList.remove("pushed-btn"); // отжатая кнопка //!
             } else {
                 unmarkBtns();
                 pushedButton.classList.add("pushed-btn");

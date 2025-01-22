@@ -323,6 +323,10 @@ img {
     background: radial-gradient(rgb(255 255 255), rgb(255 255 255), rgb(210 222 223), rgb(136 136 137));
 }
 
+.part-info-button.pushed-btn {
+    background: rgb(210 222 223); 
+}
+
 /* Информационный блок по костюму*/
 
 .info-block {
