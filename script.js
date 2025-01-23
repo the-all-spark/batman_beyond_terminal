@@ -24,7 +24,6 @@ function showAll() {
     // * Выбор действия при клике на кнопку "клавиатуры", эффект нажатой кнопки
     keyboardButtons.forEach((button) => button.addEventListener("click", function () {
         //console.log(this.dataset);
-
         markBtnAsPushed(this.dataset);
         showHideRightPhoto(this.dataset);
         hideShowHelpBlock(); // скрыть инфо-блок
@@ -36,37 +35,41 @@ function showAll() {
     function markBtnAsPushed(dataAttr) {
         let attr = Object.keys(dataAttr)[0];
         let value = Object.values(dataAttr)[0];
+        //console.log(dataAttr);
         //console.log(attr);
         //console.log(value);
 
         let pushedButton;
-        switch(attr) {
-            case 'part': 
-            case 'costume':
-                pushedButton = document.querySelector(`.keyboard button[data-${attr}="${value}"]`); 
-                break;
-            case 'button': 
-                pushedButton = document.querySelector(`.part-info-button[data-${attr}="${value}"]`); 
-                break;
+        if (attr == 'button') {
+            pushedButton = document.querySelector(`.part-info-button[data-${attr}="${value}"]`);
+            addClassToBtn("pushed-part-btn");
+            pushedButton.setAttribute("disabled", "");
+        } else {
+            // если 'part' или 'costume'
+            pushedButton = document.querySelector(`.keyboard button[data-${attr}="${value}"]`); 
+            addClassToBtn("pushed-btn");
         }
-        //console.log(pushedButton);
 
-        if (pushedButton !== null) {
-            if (pushedButton.classList.contains("pushed-btn")) {
-                pushedButton.classList.remove("pushed-btn"); // отжатая кнопка //!
-            } else {
-                unmarkBtns();
-                pushedButton.classList.add("pushed-btn");
+        // функция добавления класса кнопке клавиатуры или меню по частям костюма
+        function addClassToBtn(btnClass) {
+            if (pushedButton !== null) {
+                if (pushedButton.classList.contains(`${btnClass}`)) {
+                    pushedButton.classList.remove(`${btnClass}`); // отжатая кнопка 
+                } else {
+                    unmarkBtns(btnClass);
+                    pushedButton.classList.add(`${btnClass}`);
+                }
             }
         }
     }
 
     // функция удаления выделения всех ранее "нажатых" кнопок
-    function unmarkBtns() {
-        let previousMarkedBtns = document.querySelectorAll(".pushed-btn");
+    function unmarkBtns(btnClass) {
+        let previousMarkedBtns = document.querySelectorAll(`.${btnClass}`);
 
         previousMarkedBtns.forEach((button) => {
-            button.classList.remove("pushed-btn");
+            button.classList.remove(`${btnClass}`);
+            button.removeAttribute("disabled");
         });
     }
 

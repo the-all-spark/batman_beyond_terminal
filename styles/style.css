@@ -320,11 +320,18 @@ img {
 
 .part-buttons-block button:hover {
     cursor: pointer;
+}
+
+.part-buttons-block button:hover:not(:disabled) {
     background: radial-gradient(rgb(255 255 255), rgb(255 255 255), rgb(210 222 223), rgb(136 136 137));
 }
 
-.part-info-button.pushed-btn {
+.part-info-button.pushed-part-btn {
     background: rgb(210 222 223); 
+}
+
+.part-info-button.pushed-part-btn:disabled {
+    color: rgb(26, 27, 30);
 }
 
 /* Информационный блок по костюму*/
