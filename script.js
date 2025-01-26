@@ -25,9 +25,11 @@ function showAll() {
     keyboardButtons.forEach((button) => button.addEventListener("click", function () {
         //console.log(this.dataset);
         markBtnAsPushed(this.dataset);
-        showHideRightPhoto(this.dataset);
+
+        hideShowRightPhoto(this.dataset);
         hideShowHelpBlock(); // скрыть инфо-блок
         hidePrevious(this.dataset); // скрыть предыдущие выделения
+
         chooseAction(this.dataset);
     }));
 
@@ -74,7 +76,7 @@ function showAll() {
     }
 
     // функция скрывает или возвращает фотографию справа в зависимости от значения атрибута и ширины экрана
-    function showHideRightPhoto(dataAttr) {
+    function hideShowRightPhoto(dataAttr) {
         let photo = document.querySelector(".terry-photo");
 
         if (Object.keys(dataAttr)[0] === 'part' && windowWidth <= 1260) {
@@ -99,7 +101,7 @@ function showAll() {
         } 
 
         if ("part" in dataAttr) {
-            showCostumePart(dataAttr) // отображение рамки и увеличенного фрагмента
+            showCostumePart(dataAttr); // отображение рамки и увеличенного фрагмента
             showCostumeInfo(dataAttr); // отображение информации
         } 
         
@@ -384,14 +386,18 @@ function showAll() {
         }
     }
 
-    // TODO
     // * Открытие увеличенного изображения при клике на рамку фрагмента костюма на фото 
     let costumePartsAll = document.querySelectorAll(".part-frame");
 
     costumePartsAll.forEach((part) => part.addEventListener("click", function () {
-        hidePrevious(this.dataset.part);
         markBtnAsPushed(this.dataset);
+        
+        hideShowRightPhoto(this.dataset);
+        hideShowHelpBlock(); // скрыть инфо-блок
+        hidePrevious(this.dataset);
+
         showCostumePart(this.dataset);
+        showCostumeInfo(this.dataset);
     }));
 
     // * функция выделение блока информации при клике на кнопку
@@ -646,8 +652,8 @@ let centerScreenInfo = {
                 { item: 2, text: `выводят всю необходимую информацию на внутренний дисплей маски 
                     (в том числе полученную с бэт-компьютера);` },
                 { item: 3, text: `позволяют переключаться между режимами (ночным, инфракрасным и ультрафиолетовым);` },
-                { item: 4, text: `служат цифровым биноклем (телескопическое зрение, позволяющее увеличивать кратность 
-                    изображения, чтобы видеть на дальние расстояния или разглядеть мелкие объекты вблизи; 
+                { item: 4, text: `телескопическое зрение: увеличение кратности изображения
+                    (на большие расстояния / мелкие объекты вблизи); 
                     интерфейс и система наведения показывают расстояние до выбранной цели и её скорость передвижения);` },
                 { item: 5, text: `содержат анализатор ДНК.` },
             ]
