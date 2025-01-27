@@ -94,7 +94,7 @@
         position: absolute;
         width: 200px;
         left: -30px;
-        bottom: 50px;
+        top: 255px;
         border: 1px solid grey;
     }
 
@@ -137,9 +137,9 @@
 }
 
 @media screen and (max-width: 990px) {
-    .costume-block {
+    /*.costume-block {
         grid-template-columns: 43% auto 43%;
-    }
+    }*/
     .info-block {
         right: 10px;
         left: 10px;
@@ -149,7 +149,8 @@
     }
 
     .help-block {
-        left: -50px;
+       /* top: 277px;
+        left: -50px;*/
         border: 1px solid grey;
     }
 
@@ -157,6 +158,79 @@
         font-size: 13px;
         line-height: 1.35;
     }
+
+    .terminal {
+        grid-template-columns: 12% auto 20%;
+    }
+
+    .characteristics-block {
+        grid-template-areas:
+            "costume-block"
+            "parameters";
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        row-gap: 0;
+    }
+    
+    .costume-block {
+        height: 56vh;
+        grid-template-columns: 30% auto 30%;
+    }
+    
+    .main-photo {
+        height: 45vh;
+    }
+    
+    .help-block {
+        top: -17px;
+        left: 7px;
+        width: 230px;
+    }
+    
+    .parameters {
+        display: flex;
+        column-gap: 10px;
+    }
+    
+    .param-block[data-param] {
+        width: 25%;
+        margin-bottom: 0;
+    }
+    
+    .center-screen {
+        grid-template-rows: 75% 16%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        row-gap: 65px;
+    }
+
+    button {
+        width: 90px;
+    }
+
+    .param-block p {
+        font-size: 12px;
+    }
+
+    /* Фото частей костюма + информация */
+    .part-buttons-block {
+        position: absolute;
+        bottom: -370px;
+        left: 0;
+        width: 50%;
+    } 
+    .part-buttons-block button {
+        width: 100%;
+    }
+    .shown-part {
+        display: block;
+        position: absolute;
+        left: 169px;
+    }
+    .shown-part[data-part="chest"] {
+        top: 247px;
+    }
+
 
 }
 
@@ -169,6 +243,11 @@
         left: 5px;
         bottom: 5px;
         top: 5px;
+    }
+
+    .help-block {
+        top: 303px;
+        left: -55px;
     }
 
     button {

@@ -206,7 +206,7 @@ img {
         "part-info part-info";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto;
-    column-gap: 15px;
+    /*column-gap: 15px;*/
 }
 
 .part-photo-block {
@@ -215,6 +215,7 @@ img {
 
 .part-buttons-block {
     grid-area: part-buttons;
+    margin-left: 15px;
     /* display: none; */
 }
 
@@ -381,7 +382,8 @@ img {
     background-color: white;
     border-radius: 3px;
     width: 95%;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    margin-left: auto;
     box-sizing: border-box;
     margin-top: calc(50%); /* выравнивание по центру по верт. */
 }
