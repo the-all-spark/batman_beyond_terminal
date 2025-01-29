@@ -6,6 +6,10 @@
         column-gap: 5px;
     }
 
+    .part-photo-vertical {
+        height: 28vh;
+    }
+
 
 }
 
@@ -28,14 +32,19 @@
         padding: 20px;
     }
 
-    .shown-part-photo {
-        position: absolute;
-        margin-top: 8px;
-    }
-
     button[data-info="bruce-wayne"] {
         line-height: 0.8;
         font-size: 13px;
+    }
+
+    .part-buttons-block button {
+        height: 20%;
+    }
+    .part-photo-vertical {
+        height: 24vh;
+    }
+    li {
+        font-size: 12px;
     }
 
 
@@ -43,7 +52,16 @@
 
 @media screen and (max-width: 1260px) {
     .costume-block {
-        grid-template-columns: 33% auto 33%;
+        grid-template-columns: 35% auto 33%;
+    }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 35% auto;
+    }
+    .part-info {
+        width: 95%;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .keyboard {
@@ -65,9 +83,6 @@
 }
 
 @media screen and (max-width: 1140px) {
-    .costume-block {
-        grid-template-columns: 35% auto 35%;
-    }
     button {
         font-size: 13px;
     }
@@ -84,6 +99,10 @@
     .costume-block {
         grid-template-columns: 37% auto 37%;
     }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 37% auto;
+    }
 
     button {
         padding: 1px 3px;
@@ -98,6 +117,10 @@
         border: 1px solid grey;
     }
 
+    .part-info {
+        width: 93%;
+    }
+
 
 }
 
@@ -106,6 +129,11 @@
         grid-template-columns: 40% auto 40%;
         column-gap: 0;
     }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 40% auto;
+    }
+
     .info-block {
         right: 8px;
         padding: 10px;
@@ -137,30 +165,28 @@
 }
 
 @media screen and (max-width: 990px) {
-    /*.costume-block {
-        grid-template-columns: 43% auto 43%;
-    }*/
-    .info-block {
-        right: 10px;
-        left: 10px;
-        bottom: 10px;
-        top: 8px;
-        padding: 20px;
-    }
-
-    .help-block {
-       /* top: 277px;
-        left: -50px;*/
-        border: 1px solid grey;
-    }
-
     h3 {
         font-size: 13px;
         line-height: 1.35;
     }
 
+    button {
+        width: 90px;
+    }
+
+    li {
+        font-size: 13px;
+    }
+
     .terminal {
         grid-template-columns: 12% auto 20%;
+    }
+
+    .center-screen {
+        grid-template-rows: 75% 16%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        row-gap: 65px;
     }
 
     .characteristics-block {
@@ -176,17 +202,43 @@
         height: 56vh;
         grid-template-columns: 30% auto 30%;
     }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 30% auto;
+    }
+
+    .info-block {
+        left: 180px;
+    }
     
-    .main-photo {
-        height: 45vh;
+    .info {
+        grid-template-areas:
+            "part-photo part-info"
+            "part-buttons part-info";
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 50% auto;
+        height: 95%;
+    }
+
+    .part-info {
+        margin-top: 0;
+    }
+
+    .part-photo-vertical {
+        height: 21vh;
     }
     
     .help-block {
         top: -17px;
         left: 7px;
         width: 230px;
+        border: 1px solid grey;
     }
-    
+
+    .main-photo {
+        height: 45vh;
+    }
+
     .parameters {
         display: flex;
         column-gap: 10px;
@@ -196,39 +248,17 @@
         width: 25%;
         margin-bottom: 0;
     }
-    
-    .center-screen {
-        grid-template-rows: 75% 16%;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        row-gap: 65px;
-    }
-
-    button {
-        width: 90px;
-    }
 
     .param-block p {
         font-size: 12px;
     }
 
-    /* Фото частей костюма + информация */
     .part-buttons-block {
-        position: absolute;
-        bottom: -370px;
-        left: 0;
-        width: 50%;
-    } 
-    .part-buttons-block button {
-        width: 100%;
+        margin-left: 0;
     }
-    .shown-part {
-        display: block;
-        position: absolute;
-        left: 169px;
-    }
-    .shown-part[data-part="chest"] {
-        top: 247px;
+
+    .shown-part-photo[data-part="chest"] {
+        width: 25vh;
     }
 
 
@@ -236,8 +266,18 @@
 
 @media screen and (max-width: 930px) {
     .costume-block {
-        grid-template-columns: 48% auto 48%;
+        grid-template-columns: 35% auto 35%;
     }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 35% auto;
+    }
+
+    .help-block {
+        top: 160px;
+        left: -29px;
+    }
+
     .info-block {
         right: 5px;
         left: 5px;
@@ -245,13 +285,15 @@
         top: 5px;
     }
 
-    .help-block {
-        top: 303px;
-        left: -55px;
-    }
-
     button {
         width: 90px;
+    }
+
+    .shown-part[data-part="chest"] {
+        position: absolute;
+        top: 212px;
+        left: 0;
+        width: 90%;
     }
 
     /*! */
@@ -260,6 +302,13 @@
         height: 90px;
     }
 
+
+}
+
+@media screen and (max-width: 900px) {
+    button {
+        width: 85px;
+    }
 
 }
 
@@ -272,17 +321,34 @@
         width: 28vh;
     }
 
+    li {
+        font-size: 12px;
+    }
 
+    .costume-block {
+        grid-template-columns: 35% auto 35%;
+    }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 35% auto;
+    }
+
+    .help-block {
+        left: -36px;
+    }
 
 }
 
 @media screen and (max-width: 830px) {
-    .costume-block {
-        grid-template-columns: 50% auto 50%;
+    .part-buttons-block button {
+        height: 35px;
     }
-
+    
     .part-photo-horizontal {
         width: 26vh;
+    }
+    .part-photo-vertical {
+        height: 21vh;
     }
 
     /*! */
@@ -295,7 +361,66 @@
 
 }
 
-/* ! крайний размер до появления горизонтальной прокрутки => перестраивание блоков */
-/* @media screen and (max-width: 830px) {
+@media screen and (max-width: 810px) {
+    button {
+        width: 75px;
+    }
 
-}*/
+    .info {
+        grid-template-areas:
+            "part-photo part-buttons"
+            "part-info part-info";
+        grid-template-rows: 33% auto;
+    }
+
+    .part-photo-vertical {
+        height: 17vh;
+    }
+
+    .part-info-block {
+        margin-right: 7px;
+    }
+
+    .part-info {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    button {
+        width: 70px;
+    }
+    
+    .help-block {
+        top: 168px;
+        left: -30px;
+    }
+
+}
+
+@media screen and (max-width: 730px) {
+    button {
+        width: 65px;
+        font-size: 11px;
+    }
+
+    .part-buttons-block button {
+        height: 25px;
+    }
+
+    .part-photo-vertical {
+        height: 13vh;
+    }
+
+    .info {
+        grid-template-rows: 27% auto;
+    }
+
+
+
+}
+
+
+/* ! до 690px */

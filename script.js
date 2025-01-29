@@ -78,16 +78,20 @@ function showAll() {
     // функция скрывает или возвращает фотографию справа в зависимости от значения атрибута и ширины экрана
     function hideShowRightPhoto(dataAttr) {
         let photo = document.querySelector(".terry-photo");
+        let costumeBlock = document.querySelector(".costume-block");
 
         if (Object.keys(dataAttr)[0] === 'part' && windowWidth <= 1260) {
             photo.style.display = "none";
+            costumeBlock.classList.add("changed");
         } else {
+            costumeBlock.classList.remove("changed");
             photo.style.display = "block";
         }
 
         // если не нажата ни одна из кнопок на клавиатуре
         let pushedBtns = document.querySelectorAll(".pushed-btn");
         if (pushedBtns.length == 0 )  {
+            costumeBlock.classList.remove("changed");
             photo.style.display = "block";
         }
     }
