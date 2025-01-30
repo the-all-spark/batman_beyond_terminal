@@ -31,11 +31,19 @@
                     <div class="batman-photo-block">
                         <img class="batman-photo main-photo" src="./assets/batman_beyond.jpg" alt="Batman Beyond">
 
-                        <!-- ! Рамки выделения элементов костюма -->
-                        <div class="bb-mask-area part-frame" data-part="mask"></div>
+                        <!-- ! Рамки / полигоны выделения элементов костюма -->
+                        <!-- <div class="bb-mask-area part-frame" data-part="mask"></div>
                         <div class="bb-belt-area part-frame" data-part="belt"></div>
                         <div class="bb-chest-area part-frame" data-part="chest"></div>
-                        <div class="bb-arm-area part-frame" data-part="arm"></div>
+                        <div class="bb-arm-area part-frame" data-part="arm"></div>-->
+
+                        <svg>
+                            <polygon id="mask" data-part="mask" points="74,9,146,9,146,115,74,115"></polygon>
+                            <polygon id="belt" data-part="belt" points=""></polygon>
+                            <polygon id="chest" data-part="chest" points=""></polygon>
+                            <polygon id="arm" data-part="arm" points=""></polygon>
+
+                        </svg>
 
 
                     </div>

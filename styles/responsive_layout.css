@@ -236,8 +236,9 @@
     }
 
     .main-photo {
-        /*height: 45vh;*/
-        height: 400px;
+        /*height: 45vh;
+        height: 400px;*/
+        width: 153px;
     }
 
     .parameters {
@@ -260,6 +261,13 @@
 
     .shown-part-photo[data-part="chest"] {
         width: 25vh;
+    }
+
+    .shown-part[data-part="chest"] {
+        position: absolute;
+        top: 212px;
+        left: 0;
+        width: 90%;
     }
 
 
@@ -288,13 +296,6 @@
 
     button {
         width: 90px;
-    }
-
-    .shown-part[data-part="chest"] {
-        position: absolute;
-        top: 212px;
-        left: 0;
-        width: 90%;
     }
 
     /*! */

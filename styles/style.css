@@ -177,13 +177,14 @@ img {
 }
 
 .main-photo {
-    /*height: 67vh;*/
-    height: 514px;
+    /*height: 67vh;
+    height: 514px;*/
+    width: 196px;
 }
 
 .batman-photo-block {
     grid-area: batman;
-    position: relative;
+    /*position: relative;*/ /* ! */
 }
 
 .terry-photo {
@@ -238,25 +239,53 @@ img {
     display: block;
 }
 
-/* ! Рамки выделения частей костюма */
+.batman-photo {
+    position: absolute;
+    top: 11px;
+    left: 11px;
+}
 
-.part-frame {
+/* ! Рамки / полигоны выделения частей костюма */
+
+/*.part-frame {
     border: 1px solid transparent;
     position: absolute;
     z-index: 99;
-}
+}*/
 
-.selected-part-frame {
-    border: 1px solid #ff0000;
-}
-
-.part-frame:hover {
+/*.part-frame:hover {
     border: 1px solid #494949;
     background-color: rgba(0, 0, 0, 0.13);
     cursor: pointer;
+}*/
+
+.batman-photo-block svg {
+    position: absolute;
+    top: 11px;
+    left: 11px;
+    width: 196px;
+    height: 513.28px;
+    z-index: 99;
 }
 
-.bb-mask-area {
+.batman-photo-block polygon {
+    fill: transparent;
+    -webkit-tap-highlight-color: transparent;  /*чтобы не мерцала рамка при клике*/
+    stroke: transparent;
+    stroke-width: 1;
+}
+
+.batman-photo-block polygon:hover {
+    fill: rgba(0, 0, 0, 0.13);
+    cursor: pointer;
+    stroke: #494949;
+}
+
+polygon.selected-part-frame {
+    stroke: #ff0000;
+}
+
+/*.bb-mask-area {
     width: 85px;
     height: 105px;
     top: 6px;
@@ -282,7 +311,7 @@ img {
     height: 185px;
     top: 107px;
     left: 4px;
-}
+}*/
 
 /* ! Сноски с информацией по частям костюма */
 .part-info {
