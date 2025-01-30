@@ -177,7 +177,8 @@ img {
 }
 
 .main-photo {
-    height: 67vh;
+    /*height: 67vh;*/
+    height: 514px;
 }
 
 .batman-photo-block {

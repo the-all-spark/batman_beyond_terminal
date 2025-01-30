@@ -236,7 +236,8 @@
     }
 
     .main-photo {
-        height: 45vh;
+        /*height: 45vh;*/
+        height: 400px;
     }
 
     .parameters {
@@ -309,6 +310,10 @@
     button {
         width: 85px;
     }
+    .help-block {
+        top: 168px;
+        left: -32px;
+    }
 
 }
 
@@ -373,6 +378,10 @@
         grid-template-rows: 33% auto;
     }
 
+    .costume-block {
+        grid-template-columns: 40% auto 40%;
+    }
+
     .part-photo-vertical {
         height: 17vh;
     }
@@ -386,6 +395,11 @@
         margin-left: 0;
         margin-right: 0;
     }
+
+    .help-block {
+        left: -50px;
+        top: 199px;
+    }
 }
 
 @media screen and (max-width: 765px) {
@@ -394,8 +408,16 @@
     }
     
     .help-block {
-        top: 168px;
-        left: -30px;
+        top: 193px;
+        left: -42px;
+    }
+
+    .costume-block {
+        grid-template-columns: 38% auto 38%;
+    }
+    .costume-block.changed {
+        grid-template-areas: "batman info";
+        grid-template-columns: 38% auto;
     }
 
 }
