@@ -7,8 +7,10 @@
 
 html, 
 body {
-    width: 100vw;
+    /*width: 100vw;*/
     height: 100vh;
+    width: auto;
+    /*height: auto;*/
     background-color: rgb(78, 78, 78);
 }
 
@@ -96,7 +98,7 @@ img {
 
 .terminal {
     width: 97vw;
-    height: 94vh;
+    height: 96vh;
     background-color: rgb(46, 41, 36);
     display: grid;
     grid-template-areas: "left-screen center-screen right-screen";
@@ -241,8 +243,8 @@ img {
 
 .batman-photo {
     position: absolute;
-    top: 11px;
-    left: 11px;
+    top: 9px;
+    left: 9px;
 }
 
 /* ! Рамки / полигоны выделения частей костюма */
@@ -261,8 +263,8 @@ img {
 
 .batman-photo-block svg {
     position: absolute;
-    top: 11px;
-    left: 11px;
+    top: 9px;
+    left: 9px;
     width: 196px;
     height: 513.28px;
     z-index: 99;
@@ -543,11 +545,14 @@ polygon.selected-part-frame {
 }
 
 /* Правый блок - транспорт, символ */
+.bb-symbol {
+    text-align: center;
+}
 
 .bb-symbol img {
-    width: 100%;
+    width: 90%;
     box-sizing: border-box;
-    padding: 5px 5px 12px 5px;
+    padding: 5px 5px 8px 5px;
 }
 
 .right-screen .param-block {

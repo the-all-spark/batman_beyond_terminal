@@ -368,7 +368,8 @@ function showAll() {
 
     // функция отображения рамки при клике на часть костюма
     function showFrame(part) {
-        let selectedCostumePart = document.querySelector(`.batman-photo-block div[data-part="${part}"]`);
+        let selectedCostumePart = document.querySelector(`.batman-photo-block svg polygon[data-part="${part}"]`);
+        //let selectedCostumePart = document.getElementById(`${part}`);
 
         //selectedCostumePart.classList.toggle("selected-part-frame");
         if (selectedCostumePart.classList.contains("selected-part-frame")) {
@@ -391,7 +392,7 @@ function showAll() {
     }
 
     // * Открытие увеличенного изображения при клике на рамку фрагмента костюма на фото 
-    let costumePartsAll = document.querySelectorAll(".part-frame");
+    let costumePartsAll = document.querySelectorAll("svg polygon");
 
     costumePartsAll.forEach((part) => part.addEventListener("click", function () {
         markBtnAsPushed(this.dataset);
@@ -427,7 +428,7 @@ function showAll() {
 
     document.querySelector(".parameters").append(intelligenceParam);
     document.querySelector(".parameters").append(strengthParam);
-    document.querySelector(".bb-symbol").append(mainInfo);
+    document.querySelector(".bb-symbol").after(mainInfo);
 
     // * функция вывода информации по каждому блоку (элементу объекта)
     function constructInfoBlock(infoBlock) {
